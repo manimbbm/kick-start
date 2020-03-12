@@ -1,17 +1,23 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-void reverse (int arr[]) {
-    int arrSize = sizeof(arr)/sizeof(arr[0]);
-    int temp[arrSize], i, n;
-    n = arrSize - 1;
-    for (i = 0; i < arrSize; i++, n--) {
-        temp[i] = arr[n];
-//        not working
-    }
+void swap (int x, int y){
+    printf("x %p y %p\n", x, y);
+    int * temp = &x;
+    &x = &y;
+    &y = temp;
+    printf("x %p y %p", x, y);
+    // not working
+}
 
-    for (i = 0; i < arrSize; i++) {
-        arr[i] = temp[i];
+void reverse (int arr[], int start, int end) {
+    // works fine if uncommenting and removing broken swap
+    int temp, i;
+    for (start; start < end; start++, end--) {
+        // temp = arr[start];
+        // arr[start] = arr[end];
+        // arr[end] = temp;
+        swap(arr[start], arr[end]);
     }
 
     return;
@@ -30,7 +36,7 @@ int main() {
             scanf("%d", &A[j]);
         }
 
-	    reverse(A);
+	    reverse(A, 0, n-1);
 	    for(j = 0; j < n; j++){
             printf(" %d", A[j]);
         }
