@@ -8,8 +8,8 @@ void swap (int *x, int *y){
     *y = temp;
 }
 
-// verified
-void reverse (int arr[], int start, int end) {
+// broken: not decremently ordered
+void reverse_order (int arr[], int start, int end) {
     int temp;
     // debug: 
     int i, n = end;
@@ -61,6 +61,7 @@ int main() {
             scanf("%d", &A[j]);
         }
         
+        q_sort(A, n, sizeof(A[n-1]), max_c);
         reverse(A, 0, n);
 		h_index(A, n, i);
 	}
