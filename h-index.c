@@ -8,20 +8,30 @@ void swap (int *x, int *y){
     *y = temp;
 }
 
-// broken: not decremently ordered
-void reverse_order (int arr[], int start, int end) {
+// verified
+void reverse (int arr[], int start, int end) {
     int temp;
-    // debug: 
-    int i, n = end;
+    // debug: int i, n = end;
     for (start; start < end; start++, end--) {
         swap(arr + start, arr + end - 1);
     }
     // debug:
-    printf("arr: ");
-    for (i = 0; i < n; i ++) {
-        printf("%d ", arr[i]);
-    }
-    printf("\n");	
+    // printf("arr: ");
+    // for (i = 0; i < n; i ++) {
+    //     printf("%d ", arr[i]);
+    // }
+    // printf("\n");	
+}
+
+int comp (const void * x, const void * y) {
+	int f = *(int*)x;
+	int s = *(int*)y;
+	if (f > s) {
+		return 1;
+	} else if(s > f){
+		return -1;
+	}
+	return 0;
 }
 
 int max_c (int x, int y) {
@@ -39,9 +49,21 @@ int min_c (int x, int y) {
 }
 
 void h_index (int papers[], int n, int cur_case) {
-	int cur_max = 1, cur_min = 1;
+	int cur_max = 1, cur_min = 1, j;
     printf("Case #%d: ", cur_case);
     for (int i = 1; i < n + 1; i++) {
+    	// idea: order while going through the array, rethink
+    	if (i > 1) {
+    		j = i;
+    		while (papers[j-1] > papers[j]) {
+    			swap(papers + j - 1, papers + j);
+    			if(j-1 = 0) {
+    				break;
+    			}
+    			j--;
+    		}
+
+    	}
     	cur_min = min_c(i, papers[i-1]);
         cur_max = max_c(cur_min, cur_max);
         printf("%d ", cur_max);
@@ -61,8 +83,9 @@ int main() {
             scanf("%d", &A[j]);
         }
         
-        q_sort(A, n, sizeof(A[n-1]), max_c);
-        reverse(A, 0, n);
+        // the problem explicitly tells to print the results according to the given order... The approach bellow would never work
+        // qsort(A, n, sizeof(A[n-1]), comp);
+        // reverse(A, 0, n);
 		h_index(A, n, i);
 	}
 	
