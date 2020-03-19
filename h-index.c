@@ -53,30 +53,7 @@ void h_index (int papers[], int n, int cur_case) {
     printf("Case #%d: ", cur_case);
     for (int i = 1; i < n + 1; i++) {
     	// idea: H-i is the size (so far) of the array with numbers greater than current H-i
-    	cur_h_index = min_c(i, papers[i-1]);
-
-        if (i > 1) {
-    		j = i - 1;
-    		while (papers[j-1] > papers[j]) {
-    			swap(papers + j - 1, papers + j);
-    			if(j-1 = 0) {
-    				break;
-    			}
-    			j--;
-    		}
-    	}
-
-        j = i - 1;
-        for (j = i - 1; j > 0; j--) {
-            if (cur_h_index > papers[j-1]) {
-                break;
-            } else if (cur_h_index <= papers[j-1]) {
-
-            }
-
-        }
-        max_h_index = max_c(cur_h_index, max_h_index);
-        printf("%d ", max_h_index);
+    	
     }
     printf("\n");
 }
