@@ -62,7 +62,7 @@ void h_index (int papers[], int n, int cur_case) {
         if (papers[i-1] <= h_i) {
             // remove the elm if less than h_i and keep otherwise
             // remove elm from papers, how? create a list?
-            papers + i - 1 = papers + i; //NOT ASSIGNABLE ERROR
+            papers + i - 1 = papers + i; //NOT ASSIGNABLE ERROR 
             n--;
             i--;
         } else if (i > h_i) {
