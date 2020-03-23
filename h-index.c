@@ -48,28 +48,28 @@ int min_c (int x, int y) {
 	return x;
 }
 
-struct list
-{
-    
-};
 void h_index (int papers[], int n, int cur_case) {
-	int h_i = 1, j;
+	int h_i = 0, j, greater_arr;
     int greater_nums[n];
-    printf("Case #%d: ", cur_case);
+    printf("Case #%d:", cur_case);
     for (int i = 1; i < n + 1; i++) {
     	// idea: H-i is the size (so far) of the array with numbers greater than current H-i
         // printf("n: %d i: %d\n", n, i);
         if (papers[i-1] <= h_i) {
             // remove the elm if less than h_i and keep otherwise
-            // remove elm from papers, how? create a list?
-            papers + i - 1 = papers + i; //NOT ASSIGNABLE ERROR 
-            n--;
-            i--;
+            // remove elm from papers
+            // for (j = i; j < n; j++) {
+            //     swap(papers + j - 1, papers + j);
+            // }
+            // n--;
+            // i--;
+            // test set not passing, runtime exc
         } else if (i > h_i) {
             h_i++;
+            // size of greater_arr can be reduced each time h_i increases
         }
         // printf("n: %d i: %d\n\n", n, i);
-        printf(" %d", h_i);
+        printf(" %d", h_i); 
     	
     }
     printf("\n");
@@ -93,5 +93,5 @@ int main() {
 		h_index(A, n, i);
 	}
 	
-	return 0;
+	return 1;
 }
