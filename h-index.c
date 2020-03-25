@@ -48,25 +48,42 @@ int min_c (int x, int y) {
 	return x;
 }
 
+typedef struct node {
+    int c;
+    struct node* next;
+} max_citations;
+
+void push_ordered(node* head, int val) {
+    // CONTINUE
+}
+
+void print_list(node* head) {
+    // CONTINUE (to debug)
+}
+
 void h_index (int papers[], int n, int cur_case) {
+    // main_idea: H-i is the size (so far) of the array with numbers greater than current H-i
 	int h_i = 0, j, greater_arr;
-    int greater_nums[n];
+    max_citations * head = NULL;
+    head = (max_citations *) malloc(sizeof(max_citations));
+    head->c = 1;
+    head->next = NULL;
+
     printf("Case #%d:", cur_case);
     for (int i = 1; i < n + 1; i++) {
-    	// idea: H-i is the size (so far) of the array with numbers greater than current H-i
+    	
         // printf("n: %d i: %d\n", n, i);
-        if (papers[i-1] <= h_i) {
-            // remove the elm if less than h_i and keep otherwise
-            // remove elm from papers
-            // for (j = i; j < n; j++) {
-            //     swap(papers + j - 1, papers + j);
-            // }
-            // n--;
-            // i--;
-            // test set not passing, runtime exc
-        } else if (i > h_i) {
+        if (papers[i-1] > h_i) {
+            // add the citation ordered to the max array
+            push_ordered(max_citations, papers[i-1]);
+            if(max_citations->c <= h_i) {
+                max_citations * cur = NULL
+                max_citations * cur = (max_citations *) malloc(sizeof(max_citations));
+                while ()
+                    // CONTINUE
+                    // size of greater_arr can be reduced each time h_i increases
+            }
             h_i++;
-            // size of greater_arr can be reduced each time h_i increases
         }
         // printf("n: %d i: %d\n\n", n, i);
         printf(" %d", h_i); 
@@ -87,10 +104,7 @@ int main() {
             scanf("%d", &A[j]);
         }
         
-        // the problem explicitly tells to print the results according to the given order... The approach bellow would never work
-        // qsort(A, n, sizeof(A[n-1]), comp);
-        // reverse(A, 0, n);
-		h_index(A, n, i);
+        h_index(A, n, i);
 	}
 	
 	return 1;
