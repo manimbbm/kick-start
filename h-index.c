@@ -50,24 +50,52 @@ int min_c (int x, int y) {
 
 typedef struct node {
     int c;
-    struct node* next;
-} max_citations;
+    struct node * next;
+} node_type;
 
-void push_ordered(node* head, int val) {
+int push_ordered(node_type * head, int val) {
     // CONTINUE
+    // https://www.learn-c.org/en/Linked_lists
+    node_type * cur =  head;
+    node_type * temp = (node_type *) malloc(sizeof(node_type));
+    temp->c = val;
+    while (cur) {
+        if (cur->c < val) {
+            cur = cur->next;
+        } else {
+            temp->next = cur->next;
+            cur->next = temp;
+            return 1;
+        }
+    }
+    temp->next = NULL;
+    cur->next = temp;
+    return 1;
 }
 
-void print_list(node* head) {
-    // CONTINUE (to debug)
+void print_list(node_type * head) {
+    node_type * cur = head;
+
+    while (cur != NULL) {
+        printf("%d ", cur->c);
+        cur = cur -> next;
+    }
 }
 
 void h_index (int papers[], int n, int cur_case) {
     // main_idea: H-i is the size (so far) of the array with numbers greater than current H-i
 	int h_i = 0, j, greater_arr;
-    max_citations * head = NULL;
-    head = (max_citations *) malloc(sizeof(max_citations));
-    head->c = 1;
-    head->next = NULL;
+    node_type * max_citations = NULL;
+    max_citations = (node_type *) malloc(sizeof(node_type));
+    if (max_citations == NULL) {
+        // return 1;
+    }
+    max_citations->next = (node_type *) malloc(sizeof(node_type));
+    max_citations->next->next = (node_type *) malloc(sizeof(node_type));
+    max_citations->c = 1;
+    max_citations->next->c = 13;
+    max_citations->next->next->c = 4;
+
 
     printf("Case #%d:", cur_case);
     for (int i = 1; i < n + 1; i++) {
@@ -77,9 +105,9 @@ void h_index (int papers[], int n, int cur_case) {
             // add the citation ordered to the max array
             push_ordered(max_citations, papers[i-1]);
             if(max_citations->c <= h_i) {
-                max_citations * cur = NULL
-                max_citations * cur = (max_citations *) malloc(sizeof(max_citations));
-                while ()
+                node_type * cur = NULL;
+                cur = (node_type *) malloc(sizeof(node_type));
+                // while () {}
                     // CONTINUE
                     // size of greater_arr can be reduced each time h_i increases
             }
@@ -95,17 +123,30 @@ void h_index (int papers[], int n, int cur_case) {
 int main() {
 	int t, n, i, j;
 
-	scanf("%d", &t);
-	for (i = 1; i < t + 1; i++) {
-	    scanf("%d", &n);
-	    int A[n];
+	// scanf("%d", &t);
+	// for (i = 1; i < t + 1; i++) {
+	//     scanf("%d", &n);
+	//     int A[n];
 
-	    for(j = 0; j < n; j++){
-            scanf("%d", &A[j]);
-        }
+	//     for(j = 0; j < n; j++){
+ //            scanf("%d", &A[j]);
+ //        }
         
-        h_index(A, n, i);
-	}
-	
+ //        h_index(A, n, i);
+	// }
+	node_type * max_citations = NULL;
+    max_citations = (node_type *) malloc(sizeof(node_type));
+    max_citations->next = (node_type *) malloc(sizeof(node_type));
+    max_citations->next->next = (node_type *) malloc(sizeof(node_type));
+    max_citations->next->next->next = NULL;
+    if (max_citations == NULL) {
+        return 1;
+    }
+    max_citations->c = 1;
+    max_citations->next->c = 13;
+    max_citations->next->next->c = 4;
+
+    print_list(max_citations);
+
 	return 1;
 }
