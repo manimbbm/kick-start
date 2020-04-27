@@ -54,13 +54,17 @@ typedef struct node {
 } node_type;
 
 int push_ordered(node_type * head, int val) {
-    // CONTINUE
     // https://www.learn-c.org/en/Linked_lists
     node_type * cur =  head;
     node_type * temp = (node_type *) malloc(sizeof(node_type));
     temp->c = val;
-    while (cur) {
-        if (cur->c < val) {
+    if (cur->c >= val) {
+        temp->next = cur->next;
+        return 1;
+    }
+
+    while (cur->next) {
+        if (cur->next->c < val) {
             cur = cur->next;
         } else {
             temp->next = cur->next;
@@ -71,6 +75,20 @@ int push_ordered(node_type * head, int val) {
     temp->next = NULL;
     cur->next = temp;
     return 1;
+}
+
+
+int remove_value(node_type * head, int val) {
+    // https://www.learn-c.org/en/Linked_lists
+    node_type * cur =  head;
+    node_type * temp = NULL;
+
+    while (cur->next->c <= val) {
+    	temp = cur->next;
+    	cur->next = temp;
+    	free(temp);
+        return 1;
+    }
 }
 
 void print_list(node_type * head) {
@@ -85,8 +103,7 @@ void print_list(node_type * head) {
 void h_index (int papers[], int n, int cur_case) {
     // main_idea: H-i is the size (so far) of the array with numbers greater than current H-i
 	int h_i = 0, j, greater_arr;
-    node_type * max_citations = NULL;
-    max_citations = (node_type *) malloc(sizeof(node_type));
+    node_type * max_citations = (node_type *) malloc(sizeof(node_type));
     if (max_citations == NULL) {
         // return 1;
     }
@@ -136,16 +153,20 @@ int main() {
 	// }
 	node_type * max_citations = NULL;
     max_citations = (node_type *) malloc(sizeof(node_type));
-    max_citations->next = (node_type *) malloc(sizeof(node_type));
-    max_citations->next->next = (node_type *) malloc(sizeof(node_type));
-    max_citations->next->next->next = NULL;
+    max_citations->next = NULL;
+    // max_citations->next = (node_type *) malloc(sizeof(node_type));
+    // max_citations->next->next = (node_type *) malloc(sizeof(node_type));
+    // max_citations->next->next->next = NULL;
     if (max_citations == NULL) {
         return 1;
     }
     max_citations->c = 1;
-    max_citations->next->c = 13;
-    max_citations->next->next->c = 4;
-
+    push_ordered(max_citations, 13);
+    push_ordered(max_citations, 4);
+    push_ordered(max_citations, 8);
+   
+    print_list(max_citations);
+    remove_value(max_citations, 1);
     print_list(max_citations);
 
 	return 1;
