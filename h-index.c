@@ -53,16 +53,23 @@ typedef struct node {
     struct node * next;
 } node_type;
 
+
+
+void push_first(node_type** head_ref, int val) {  
+    node_type* new_node = (node_type*) malloc(sizeof(node_type));  
+    new_node->c = val;  
+    new_node->next = (*head_ref);  
+    (*head_ref) = new_node;  
+}  
+
 int push_ordered(node_type * head, int val) {
     // https://www.learn-c.org/en/Linked_lists
     node_type * cur =  head;
     node_type * temp = (node_type *) malloc(sizeof(node_type));
     temp->c = val;
-    if (cur->c >= val) {
-        temp->next = cur->next;
+	if (cur->c > val) {
         return 1;
     }
-
     while (cur->next) {
         if (cur->next->c < val) {
             cur = cur->next;
@@ -82,12 +89,24 @@ int remove_value(node_type * head, int val) {
     // https://www.learn-c.org/en/Linked_lists
     node_type * cur =  head;
     node_type * temp = NULL;
+    
+    if (cur == NULL) {
+    	return -1;
+    }
 
-    while (cur->next->c <= val) {
+    if (cur->c == val) {
     	temp = cur->next;
-    	cur->next = temp;
-    	free(temp);
-        return 1;
+    	free(cur);
+    	cur = temp;
+    }
+
+    while (cur->next) {
+    	if (cur->c == val) {
+	    	temp = cur->next->next;
+	    	free(cur->next);
+	    	cur->next = temp;
+	    }
+    	cur = cur->next;
     }
 }
 
@@ -161,13 +180,19 @@ int main() {
         return 1;
     }
     max_citations->c = 1;
-    push_ordered(max_citations, 13);
+    int val = 1;
+    if (max_citations->c >= val) {
+    	push_first(&max_citations, val);
+    } 
+	push_ordered(max_citations, 13);
     push_ordered(max_citations, 4);
     push_ordered(max_citations, 8);
-   
+    push_ordered(max_citations, 1);
+
+    
     print_list(max_citations);
-    remove_value(max_citations, 1);
-    print_list(max_citations);
+    // remove_value(max_citations, 1);
+    // print_list(max_citations);
 
 	return 1;
 }
