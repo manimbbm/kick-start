@@ -1,22 +1,53 @@
-const readline = require('readline');
 
+const readline = require('readline');
+const fs = require('fs');
 const rl = readline.createInterface({
 	input: process.stdin,
 	output: process.stdout
 });
 
 let budget = 300;
+let houses = [];
+let t, n;
 
-const inputBudget = () => {
-	rl.question("What is your budget?", (answer) => {
-		budget = answer;
+const inputs = async () => {
+	t = 2;
+	rl.prompt();
+	rl.on('line', (line) => {
+		t = line;
 		rl.close();
 	});
+	//https://nodejs.org/api/readline.html#readline_example_tiny_cli
+	// reading https://blog.bitsrc.io/keep-your-promises-in-typescript-using-async-await-7bdc57041308
+	for (t; t > 0; t--) {
+		console.log('t iteration', t);
+		rl.prompt();
+		rl.on('line', (line) => {
+			n = line.split(" ")[0];
+			budget = line.split(" ")[1];
+		});
+
+		rl.prompt();
+		rl.on('line', (line) => {
+			houses = line.split(" ");
+		});
+		console.log({n, budget});
+		console.log('houses', houses);
+	}
 };
 
-inputBudget();
+inputs();
+const wait = (ms) => new Promise(res => setTimeout(res, ms));
 
-let houses = [999, 999, 999, 990];
+const startAsync = async callback => {
+	await wait(1000);
+	callback('Hello');
+	await wait(1000);
+	callback('And Welcome');
+	await wait(1000);
+	callback('To Async Await Using TypeScript');
+};
+startAsync(text => console.log(text));
 
 const allocate = (budget, houses) => {
 	houses.sort();
@@ -32,6 +63,6 @@ const allocate = (budget, houses) => {
 		}
 	}
 	return max_houses;
-}
+};
 
 console.log(allocate(budget, houses));
