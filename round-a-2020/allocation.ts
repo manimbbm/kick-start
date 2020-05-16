@@ -1,68 +1,32 @@
-
-const readline = require('readline');
 const fs = require('fs');
-const rl = readline.createInterface({
-	input: process.stdin,
-	output: process.stdout
-});
+// let input = fs.readFileSync('./test.txt', 'utf8').trim().split('\n');
+const input = fs.readFileSync(0, 'utf8').trim().split('\n');
 
-let budget = 300;
-let houses = [];
-let t, n;
+let current_line = 0;
+function readline() {
+	return input[current_line++];
+}
 
-const inputs = async () => {
-	t = 2;
-	rl.prompt();
-	rl.on('line', (line) => {
-		t = line;
-		rl.close();
-	});
-	//https://nodejs.org/api/readline.html#readline_example_tiny_cli
-	// reading https://blog.bitsrc.io/keep-your-promises-in-typescript-using-async-await-7bdc57041308
-	for (t; t > 0; t--) {
-		console.log('t iteration', t);
-		rl.prompt();
-		rl.on('line', (line) => {
-			n = line.split(" ")[0];
-			budget = line.split(" ")[1];
-		});
+let t = readline();
+for (let i = 1; i <= t; i++) {
+	let [N, budget] = readline().split(' ').map(x => +x);
+	let houses = readline().split(' ').map(x => +x);
+	console.log(`Case #${i}: ${allocation(budget, houses)}`);
+}
 
-		rl.prompt();
-		rl.on('line', (line) => {
-			houses = line.split(" ");
-		});
-		console.log({n, budget});
-		console.log('houses', houses);
-	}
-};
-
-inputs();
-const wait = (ms) => new Promise(res => setTimeout(res, ms));
-
-const startAsync = async callback => {
-	await wait(1000);
-	callback('Hello');
-	await wait(1000);
-	callback('And Welcome');
-	await wait(1000);
-	callback('To Async Await Using TypeScript');
-};
-startAsync(text => console.log(text));
-
-const allocate = (budget, houses) => {
-	houses.sort();
-	let counter = 0;
+function allocation(budget, houses) {
+	let sum = 0;
 	let max_houses = 0;
-	while(budget > 0) {
-		if (houses[counter] <= budget) {
-			budget -= houses[counter];
+
+	houses.sort((a,b)=> a-b);
+
+	for (let k = 0; k < houses.length; k++) {
+		sum += houses[k];
+		if (sum <= budget) {
 			max_houses++;
-			counter++;
-		} else {
-			break;
+		} else{
+			return max_houses;
 		}
 	}
 	return max_houses;
-};
-
-console.log(allocate(budget, houses));
+}

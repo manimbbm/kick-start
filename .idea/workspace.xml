@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5313d9a2-437c-4efb-a979-ea26134ccc66" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/webpack.config.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/round-a-2020/allocation.ts" beforeDir="false" afterPath="$PROJECT_DIR$/round-a-2020/allocation.ts" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,6 +21,11 @@
     <option name="version" value="1" />
   </component>
   <component name="ProjectId" id="1YyOA1FCWQV6FL0gwbzZsReclax" />
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
@@ -29,18 +34,6 @@
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/round-a-2020/node_modules/typescript/lib" />
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
   </component>
   <component name="SbtLocalSettings">
     <option name="projectSyncType">
@@ -65,24 +58,37 @@
       <workItem from="1588660721166" duration="1117000" />
       <workItem from="1588840962591" duration="130000" />
       <workItem from="1588917977085" duration="2626000" />
-      <workItem from="1589178550606" duration="814000" />
+      <workItem from="1589178550606" duration="1242000" />
+      <workItem from="1589185313023" duration="15000" />
+      <workItem from="1589263543053" duration="101000" />
+      <workItem from="1589350604126" duration="1396000" />
+      <workItem from="1589377369622" duration="199000" />
+      <workItem from="1589383552138" duration="194000" />
+      <workItem from="1589388095280" duration="598000" />
+      <workItem from="1589395265934" duration="125000" />
+      <workItem from="1589523474178" duration="1882000" />
+      <workItem from="1589618443700" duration="8089000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="2" />
+    <option name="exactExcludedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/round-a-2020/allocation.js" />
+      </list>
+    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>
