@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-// const input = fs.readFileSync('./countdown-test.txt', 'utf-8').trim().split('\n');
+// const input = fs.readFileSync('./stable-wall-test.txt', 'utf-8').trim().split('\n');
 const input = fs.readFileSync(0, 'utf-8').trim().split('\n');
 
 let line = 0
@@ -10,9 +10,19 @@ function readline(){
 
 let t = readline();
 for (let i = 1; i <= t; i++) {
-    let [N, K] = readline().split(" ").map(x => +x);
+    let [R, C] = readline().split(" ").map(x => +x);
+    // IDEA
+    // ZOAAMM
+    // ZOAOMM
+    // ZOOOOM
+    // ZZZZOM
+    // =>
+    //
+    //   AA
+    //  OOOM
+    // ZZZZOM
     let arr = readline().split(" ").map(x => +x);
-    console.log(`Case #${i}: ${countdown(K, arr)}`)
+    console.log(`Case #${i}: ${countdown(C, arr)}`)
 }
 
 function countdown(K, arr) {
