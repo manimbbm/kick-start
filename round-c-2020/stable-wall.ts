@@ -1,7 +1,7 @@
 const fs = require('fs');
 
-// const input = fs.readFileSync('./stable-wall-test.txt', 'utf-8').trim().split('\n');
-const input = fs.readFileSync(0, 'utf-8').trim().split('\n');
+const input = fs.readFileSync('./stable-wall-test.txt', 'utf-8').trim().split('\n');
+// const input = fs.readFileSync(0, 'utf-8').trim().split('\n');
 
 let line = 0
 function readline(){
@@ -11,48 +11,34 @@ function readline(){
 let t = readline();
 for (let i = 1; i <= t; i++) {
     let [R, C] = readline().split(" ").map(x => +x);
-    // IDEA
-    // ZOAAMM
-    // ZOAOMM
-    // ZOOOOM
-    // ZZZZOM
-    // =>
-    //
-    //   AA
-    //  OOOM
-    // ZZZZOM
-    let arr = readline().split(" ").map(x => +x);
-    console.log(`Case #${i}: ${countdown(C, arr)}`)
+
+    let arr = [];
+    for (let j = 0; j < R; j++) {
+        arr.push(readline().split('\n'));
+        console.log(arr);
+    }
+    console.log(`Case #${i}: ${stable_wall(arr)}`)
 }
 
-function countdown(K, arr) {
-    let k_contdowns = 0;
-    let decreasing_counter = 0;
-    for (let i = 1; i < arr.length; i++) {
-        if (arr[i] == arr[i-1] - 1) {
-            decreasing_counter++;
-        } else {
-            decreasing_counter = 0;
+// idea: check adjacent lines the dependency relationship
+// ZOAAMM {0, 1} = ZZ, OO, AA, AO, MM -> AO
+// ZOAOMM {1, 2} = ZZ, OO, AO,  MO, MM -> AO, MO
+// ZOOOOM {2, 3} = ZZ, OZ, OO, MM -> OZ
+// ZZZZOM
+// then I have to build a tree (make sure there are no cycles)
+
+function stable_wall(arr) {
+    let edges = [];
+    for (let i = 0; i < arr.length - 1; i++) {
+        let bottom_row = arr[i].toString();
+        let top_row = arr[i + 1].toString();
+        for (let j = 0; j < bottom_row.length - 1; j++) {
+            if (bottom_row.substring(j, j + 1) !== top_row.substring(j, j + 1) && edges.indexOf(bottom_row.substring(j, j + 1) + top_row.substring(j, j + 1)) == -1) {
+                edges.push(bottom_row.substring(j, j + 1) + top_row.substring(j, j + 1));
+            }
+            console.log(edges);
         }
-        if (arr[i] == 1 && decreasing_counter >= K-1) {
-            k_contdowns++;
-        }
-        // dont understand why the approach bellow is Wrong Answer. Should have the same O(N) as the one above...
-        // if (arr[i] === K) {
-        //     let checker = K;
-        //     let j = i;
-        //     for (j; j < i + K; j++) {
-        //         if (arr[j] !== checker--) {
-        //             break;
-        //         }
-        //     }
-        //     if (j == i + K) {
-        //         k_contdowns++;
-        //     }
-        //     if (typeof arr[j] !== 'undefined' && arr[j] !== '') {
-        //         i = j;
-        //     }
-        // }
+
     }
-    return k_contdowns;
+    return 1;
 }

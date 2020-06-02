@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5313d9a2-437c-4efb-a979-ea26134ccc66" name="Default Changelist" comment="" />
+    <list default="true" id="5313d9a2-437c-4efb-a979-ea26134ccc66" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/round-c-2020/stable-wall-test.txt" beforeDir="false" afterPath="$PROJECT_DIR$/round-c-2020/stable-wall-test.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/round-c-2020/stable-wall.ts" beforeDir="false" afterPath="$PROJECT_DIR$/round-c-2020/stable-wall.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -11,7 +15,7 @@
     <option name="done" value="true" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../kick-start" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectCodeStyleSettingsMigration">
     <option name="version" value="1" />
@@ -32,7 +36,7 @@
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="ts.external.directory.path" value="$PROJECT_DIR$/../../kick-start/node_modules/typescript/lib" />
+    <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -74,16 +78,18 @@
       <workItem from="1589618443700" duration="8601000" />
       <workItem from="1589956457340" duration="62000" />
       <workItem from="1589956691776" duration="2253000" />
+      <workItem from="1590045236132" duration="1031000" />
+      <workItem from="1590131487470" duration="996000" />
+      <workItem from="1590390284761" duration="266000" />
+      <workItem from="1590392943006" duration="16000" />
+      <workItem from="1590475567368" duration="2606000" />
+      <workItem from="1590478868973" duration="24000" />
+      <workItem from="1591080215189" duration="2183000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="2" />
-    <option name="exactExcludedFiles">
-      <list>
-        <option value="$PROJECT_DIR$/round-a-2020/allocation.js" />
-      </list>
-    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -96,5 +102,19 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="516" y="-593" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1591082537215">
+      <screen x="-127" y="-1027" width="1680" height="1027" />
+    </state>
+    <state x="516" y="-593" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/-127.-1027.1680.1027/0.23.1440.877@-127.-1027.1680.1027" timestamp="1591082537215" />
+    <state x="378" y="-276" key="run.anything.popup" timestamp="1591080333038">
+      <screen x="-127" y="-1027" width="1680" height="1027" />
+    </state>
+    <state x="378" y="-276" key="run.anything.popup/-127.-1027.1680.1027/0.23.1440.877@-127.-1027.1680.1027" timestamp="1591080333038" />
+    <state x="378" y="-863" width="670" height="676" key="search.everywhere.popup" timestamp="1591081327128">
+      <screen x="-127" y="-1027" width="1680" height="1027" />
+    </state>
+    <state x="378" y="-863" width="670" height="676" key="search.everywhere.popup/-127.-1027.1680.1027/0.23.1440.877@-127.-1027.1680.1027" timestamp="1591081327128" />
   </component>
 </project>
