@@ -36,9 +36,10 @@ function stable_wall(arr) {
             if (bottom_row.substring(j, j + 1) !== top_row.substring(j, j + 1) && edges.indexOf(bottom_row.substring(j, j + 1) + top_row.substring(j, j + 1)) == -1) {
                 edges.push(bottom_row.substring(j, j + 1) + top_row.substring(j, j + 1));
             }
-            console.log(edges);
+            console.log('edges', edges);
         }
-
+        // get the nodes and navigate from each to the others
+        // start from root node(s) (there could be more than one). The root is the letter without parent, or the one that only comes up on the left of an edge
     }
     return 1;
 }
