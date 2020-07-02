@@ -29,17 +29,32 @@ for (let i = 1; i <= t; i++) {
 
 function stable_wall(arr) {
     let edges = [];
+    let nodes = [];
     for (let i = 0; i < arr.length - 1; i++) {
-        let bottom_row = arr[i].toString();
-        let top_row = arr[i + 1].toString();
-        for (let j = 0; j < bottom_row.length - 1; j++) {
-            if (bottom_row.substring(j, j + 1) !== top_row.substring(j, j + 1) && edges.indexOf(bottom_row.substring(j, j + 1) + top_row.substring(j, j + 1)) == -1) {
-                edges.push(bottom_row.substring(j, j + 1) + top_row.substring(j, j + 1));
+        let top_row
+            = arr[i].toString();
+        let bottom_row = arr[i + 1].toString();
+        for (let j = 0; j < top_row.length - 1; j++) {
+            let top_letter = top_row.substring(j, j + 1);
+            let bottom_letter = bottom_row.substring(j, j + 1);
+            if (top_letter !== bottom_letter && edges.indexOf(top_letter + bottom_letter) == -1) {
+                edges.push(top_letter + bottom_letter);
+                addToNodes(bottom_letter, nodes);
+                addToNodes(top_letter, nodes);
             }
             console.log('edges', edges);
         }
-        // get the nodes and navigate from each to the others
-        // start from root node(s) (there could be more than one). The root is the letter without parent, or the one that only comes up on the left of an edge
+        console.log('nodes', nodes);
+        // get the nodes √
+        // navigate from each to the others
+        // start from root node(s) (there could be more than one). The root is the letter without parent, or the one that only comes up on the right of an edge
     }
     return 1;
 }
+
+function addToNodes(node, nodes) {
+    if (nodes.indexOf(node) == -1) {
+        nodes.push(node);
+    }
+}
+
