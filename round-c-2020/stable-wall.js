@@ -1,46 +1,39 @@
-const fs = require('fs');
-
-const input = fs.readFileSync('./stable-wall-test.txt', 'utf-8').trim().split('\n');
+var fs = require('fs');
+var input = fs.readFileSync('./stable-wall-test.txt', 'utf-8').trim().split('\n');
 // const input = fs.readFileSync(0, 'utf-8').trim().split('\n');
-
-let line = 0
-function readline(){
+var line = 0;
+function readline() {
     return input[line++];
 }
-
-let t = readline();
-for (let i = 1; i <= t; i++) {
-    let [R, C] = readline().split(" ").map(x => +x);
-
-    let arr = [];
-    for (let j = 0; j < R; j++) {
+var t = readline();
+for (var i = 1; i <= t; i++) {
+    var _a = readline().split(" ").map(function (x) { return +x; }), R = _a[0], C = _a[1];
+    var arr = [];
+    for (var j = 0; j < R; j++) {
         arr.push(readline().split('\n'));
         console.log(arr);
     }
-    console.log(`Case #${i}: ${stable_wall(arr)}`)
+    console.log("Case #" + i + ": " + stable_wall(arr));
 }
-
 // idea: check adjacent lines the dependency relationship
 // ZOAAMM {0, 1} = ZZ, OO, AA, AO, MM -> AO
 // ZOAOMM {1, 2} = ZZ, OO, AO,  MO, MM -> AO, MO
 // ZOOOOM {2, 3} = ZZ, OZ, OO, MM -> OZ
 // ZZZZOM
 // then I have to build a tree (make sure there are no cycles)
-
 function stable_wall(arr) {
-    let edges = [];
-    let nodes = {
+    var edges = [];
+    var nodes = {
         ids: [],
         roots: [],
-        notRoots: [],
+        notRoots: []
     };
-    for (let i = 0; i < arr.length - 1; i++) {
-        let top_row
-            = arr[i].toString();
-        let bottom_row = arr[i + 1].toString();
-        for (let j = 0; j < top_row.length - 1; j++) {
-            let top_letter = top_row.substring(j, j + 1);
-            let bottom_letter = bottom_row.substring(j, j + 1);
+    for (var i = 0; i < arr.length - 1; i++) {
+        var top_row = arr[i].toString();
+        var bottom_row = arr[i + 1].toString();
+        for (var j = 0; j < top_row.length - 1; j++) {
+            var top_letter = top_row.substring(j, j + 1);
+            var bottom_letter = bottom_row.substring(j, j + 1);
             if (top_letter !== bottom_letter && edges.indexOf(top_letter + bottom_letter) == -1) {
                 edges.push(top_letter + bottom_letter);
                 addToNodes(top_letter, nodes, false);
@@ -56,8 +49,7 @@ function stable_wall(arr) {
     roots(nodes);
     return 1;
 }
-
-function addToNodes(node, nodes, isRoot?: boolean) {
+function addToNodes(node, nodes, isRoot) {
     if (nodes.ids.indexOf(node) == -1) {
         nodes.ids.push(node);
     }
@@ -65,12 +57,9 @@ function addToNodes(node, nodes, isRoot?: boolean) {
         nodes.notRoots.push(node);
     }
 }
-
 function roots(nodes) {
-    //continue
     nodes.roots.push(nodes.ids);
-    nodes.notRoots.forEach((node) => {
+    nodes.notRoots.forEach(function (node) {
         delete nodes.roots[nodes.roots.indexOf(node)];
-    })
+    });
 }
-
