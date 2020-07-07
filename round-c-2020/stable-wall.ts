@@ -48,13 +48,13 @@ function stable_wall(arr) {
             }
             console.log('edges', edges);
         }
-        console.log('nodes', nodes);
         // get the nodes √
         // check if root: the letter without parent, or the one that only comes up on the right of an edge
         // navigate from each to the others starting from root node(s)
     }
     roots(nodes);
-    return 1;
+    console.log('nodes', nodes);
+    return;
 }
 
 function addToNodes(node, nodes, isRoot?: boolean) {
@@ -68,9 +68,9 @@ function addToNodes(node, nodes, isRoot?: boolean) {
 
 function roots(nodes) {
     //continue
-    nodes.roots.push(nodes.ids);
+    nodes.roots = nodes.ids.slice();
     nodes.notRoots.forEach((node) => {
-        delete nodes.roots[nodes.roots.indexOf(node)];
+        nodes.roots.splice(nodes.roots.indexOf(node), 1);
     })
 }
 
