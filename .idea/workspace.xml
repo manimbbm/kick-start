@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="5313d9a2-437c-4efb-a979-ea26134ccc66" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/round-c-2020/stable-wall.js" beforeDir="false" afterPath="$PROJECT_DIR$/round-c-2020/stable-wall.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/round-c-2020/stable-wall.ts" beforeDir="false" afterPath="$PROJECT_DIR$/round-c-2020/stable-wall.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -86,12 +87,20 @@
       <workItem from="1591080215189" duration="2213000" />
       <workItem from="1593498436837" duration="1673000" />
       <workItem from="1593504471331" duration="104000" />
-      <workItem from="1593671121658" duration="1096000" />
+      <workItem from="1593671121658" duration="1656000" />
+      <workItem from="1593758688557" duration="2220000" />
+      <workItem from="1594104189593" duration="639000" />
+      <workItem from="1594189580475" duration="1533000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="2" />
+    <option name="exactExcludedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/round-c-2020/stable-wall.js" />
+      </list>
+    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">

@@ -1,3 +1,5 @@
+"use strict";
+exports.__esModule = true;
 var fs = require('fs');
 var input = fs.readFileSync('./stable-wall-test.txt', 'utf-8').trim().split('\n');
 // const input = fs.readFileSync(0, 'utf-8').trim().split('\n');
@@ -36,17 +38,34 @@ function stable_wall(arr) {
             var bottom_letter = bottom_row.substring(j, j + 1);
             if (top_letter !== bottom_letter && edges.indexOf(top_letter + bottom_letter) == -1) {
                 edges.push(top_letter + bottom_letter);
+                // get the nodes √
                 addToNodes(top_letter, nodes, false);
                 addToNodes(bottom_letter, nodes);
             }
             console.log('edges', edges);
         }
-        // get the nodes √
-        // check if root: the letter without parent, or the one that only comes up on the right of an edge
-        // navigate from each to the others starting from root node(s)
     }
+    // check if root: the letter without parent, or the one that only comes up on the right of an edge √
     roots(nodes);
+    // navigate from each to the others starting from root node(s)
     console.log('nodes', nodes);
+    nodes.roots.forEach(function (root) {
+        //continue
+        console.log('root', root);
+        var visited;
+        //    if cycle, break
+        var current = root;
+        var longest_branch = root;
+        console.log('longest', longest_branch);
+        edges.forEach(function (edge) {
+            if (edge.substring(1, 2) == root) {
+                console.log('edge.substring(1,2)', edge.substring(1, 2));
+                console.log('edge.substring(0,1)', edge.substring(0, 1));
+                longest_branch = longest_branch.concat(edge.substring(0, 1));
+                console.log('longest', longest_branch);
+            }
+        });
+    });
     return;
 }
 function addToNodes(node, nodes, isRoot) {
@@ -58,7 +77,6 @@ function addToNodes(node, nodes, isRoot) {
     }
 }
 function roots(nodes) {
-    //continue
     nodes.roots = nodes.ids.slice();
     nodes.notRoots.forEach(function (node) {
         nodes.roots.splice(nodes.roots.indexOf(node), 1);

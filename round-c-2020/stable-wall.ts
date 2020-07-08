@@ -1,3 +1,5 @@
+import {forEachChild} from "typescript";
+
 const fs = require('fs');
 
 const input = fs.readFileSync('./stable-wall-test.txt', 'utf-8').trim().split('\n');
@@ -35,25 +37,41 @@ function stable_wall(arr) {
         notRoots: [],
     };
     for (let i = 0; i < arr.length - 1; i++) {
-        let top_row
-            = arr[i].toString();
+        let top_row = arr[i].toString();
         let bottom_row = arr[i + 1].toString();
         for (let j = 0; j < top_row.length - 1; j++) {
             let top_letter = top_row.substring(j, j + 1);
             let bottom_letter = bottom_row.substring(j, j + 1);
             if (top_letter !== bottom_letter && edges.indexOf(top_letter + bottom_letter) == -1) {
                 edges.push(top_letter + bottom_letter);
+                // get the nodes √
                 addToNodes(top_letter, nodes, false);
                 addToNodes(bottom_letter, nodes);
             }
             console.log('edges', edges);
         }
-        // get the nodes √
-        // check if root: the letter without parent, or the one that only comes up on the right of an edge
-        // navigate from each to the others starting from root node(s)
     }
+    // check if root: the letter without parent, or the one that only comes up on the right of an edge √
     roots(nodes);
+    // navigate from each to the others starting from root node(s)
     console.log('nodes', nodes);
+
+    nodes.roots.forEach(function(root) {
+        //continue
+        console.log('root', root);
+        let visited;
+    //    if cycle, break
+        let current = root;
+        let longest_branch: string = root;
+        console.log('longest', longest_branch);
+        edges.forEach(function(edge) {
+            if (edge.substring(1,2) == root) {
+                longest_branch = longest_branch.concat(edge.substring(0,1));
+                console.log('longest', longest_branch);
+            }
+        })
+
+    });
     return;
 }
 
@@ -67,7 +85,6 @@ function addToNodes(node, nodes, isRoot?: boolean) {
 }
 
 function roots(nodes) {
-    //continue
     nodes.roots = nodes.ids.slice();
     nodes.notRoots.forEach((node) => {
         nodes.roots.splice(nodes.roots.indexOf(node), 1);
