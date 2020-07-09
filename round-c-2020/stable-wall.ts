@@ -34,7 +34,7 @@ function stable_wall(arr) {
     let nodes = {
         ids: [],
         roots: [],
-        notRoots: [],
+        nonRoots: [],
     };
     for (let i = 0; i < arr.length - 1; i++) {
         let top_row = arr[i].toString();
@@ -59,18 +59,27 @@ function stable_wall(arr) {
     nodes.roots.forEach(function(root) {
         //continue
         console.log('root', root);
-        let visited;
+        let visited: any[] = [];
     //    if cycle, break
         let current = root;
         let longest_branch: string = root;
         console.log('longest', longest_branch);
-        edges.forEach(function(edge) {
-            if (edge.substring(1,2) == root) {
-                longest_branch = longest_branch.concat(edge.substring(0,1));
-                console.log('longest', longest_branch);
-            }
-        })
-
+        while (visited.length <= nodes.nonRoots.length) {
+            edges.forEach(function(edge) {
+                if (edge.substring(1,2) == current) {
+                    // continue (maybe try some drawing for this)
+                    current = edge.substring(0,1);
+                    longest_branch = longest_branch.concat(current);
+                    console.log('longest', longest_branch);
+                }
+            });
+            visited.push(current);
+            nodes.nonRoots.forEach(function (nonRoot) {
+                current = visited.includes(nonRoot) ? current : nonRoot;
+            });
+            console.log('visited', visited);
+            console.log('current', current);
+        }
     });
     return;
 }
@@ -79,14 +88,14 @@ function addToNodes(node, nodes, isRoot?: boolean) {
     if (nodes.ids.indexOf(node) == -1) {
         nodes.ids.push(node);
     }
-    if (isRoot !== undefined && !isRoot && nodes.notRoots.indexOf(node) == -1) {
-        nodes.notRoots.push(node);
+    if (isRoot !== undefined && !isRoot && nodes.nonRoots.indexOf(node) == -1) {
+        nodes.nonRoots.push(node);
     }
 }
 
 function roots(nodes) {
     nodes.roots = nodes.ids.slice();
-    nodes.notRoots.forEach((node) => {
+    nodes.nonRoots.forEach((node) => {
         nodes.roots.splice(nodes.roots.indexOf(node), 1);
     })
 }
