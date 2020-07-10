@@ -1,4 +1,4 @@
-import {forEachChild} from "typescript";
+import {createBinary, forEachChild} from "typescript";
 
 const fs = require('fs');
 
@@ -53,26 +53,29 @@ function stable_wall(arr) {
     }
     // check if root: the letter without parent, or the one that only comes up on the right of an edge √
     roots(nodes);
-    // navigate from each to the others starting from root node(s)
+    // navigate from each node to the others starting from root node(s)
     console.log('nodes', nodes);
 
     nodes.roots.forEach(function(root) {
-        //continue
         console.log('root', root);
         let visited: any[] = [];
-    //    if cycle, break
         let current = root;
         let longest_branch: string = root;
         console.log('longest', longest_branch);
         while (visited.length <= nodes.nonRoots.length) {
-            edges.forEach(function(edge) {
-                if (edge.substring(1,2) == current) {
+
+            //improve with binary search
+            let elm = edges.find(e => e.substring(1,2) == current);
+            while ( visited.includes(elm.substring(0,1)) && )
+            for (let i = 0; i < edges.length; i++) {
+                if (edges[i].substring(1,2) == current) {
                     // continue (maybe try some drawing for this)
-                    current = edge.substring(0,1);
+                    current = edges[i].substring(0,1);
                     longest_branch = longest_branch.concat(current);
                     console.log('longest', longest_branch);
                 }
-            });
+            }
+
             visited.push(current);
             nodes.nonRoots.forEach(function (nonRoot) {
                 current = visited.includes(nonRoot) ? current : nonRoot;
