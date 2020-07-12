@@ -64,12 +64,11 @@ function stable_wall(arr) {
         console.log('longest', longest_branch);
         while (visited.length <= nodes.nonRoots.length) {
 
-            //improve with binary search
+            //just draw/hand write next time
             let elm = edges.find(e => e.substring(1,2) == current);
             while ( visited.includes(elm.substring(0,1)) && )
             for (let i = 0; i < edges.length; i++) {
                 if (edges[i].substring(1,2) == current) {
-                    // continue (maybe try some drawing for this)
                     current = edges[i].substring(0,1);
                     longest_branch = longest_branch.concat(current);
                     console.log('longest', longest_branch);

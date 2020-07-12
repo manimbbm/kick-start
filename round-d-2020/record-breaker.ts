@@ -1,7 +1,7 @@
 const fs = require('fs');
 
-const input = fs.readFileSync('./record-test.txt', 'utf-8').trim().split('\n');
-// const input = fs.readFileSync(0, 'utf-8').trim().split('\n');
+// const input = fs.readFileSync('./record-test.txt', 'utf-8').trim().split('\n');
+const input = fs.readFileSync(0, 'utf-8').trim().split('\n');
 
 let line = 0
 function readline(){
@@ -16,12 +16,12 @@ for (let i = 1; i <= t; i++) {
 }
 
 function record_breaker(visitors) {
-    let max = 0;
+    let max = -1;
     let r_breaker = 0;
     for (let i = 0; i < visitors.length; i++) {
         if (visitors[i] > max) {
             max = visitors[i];
-            if (visitors[i] > visitors[i+1] || visitors[i+1] === undefined) {
+            if (i+1 === visitors.length || visitors[i] > visitors[i+1]) {
                 r_breaker++;
             }
         }
