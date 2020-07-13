@@ -16,8 +16,8 @@ function alien_piano(pitches) {
     var map_alien_piano = [];
     var rule_break = 0;
     pitches.forEach(function (pitch, index) {
-        if (pitches[index--] == pitches[index]) {
-            map_alien_piano.push(map_alien_piano[index--]);
+        if (pitches[index - 1] == pitches[index]) {
+            map_alien_piano.push(map_alien_piano[index - 1]);
             return;
         }
         var optimal_4 = pitches.slice(index, index + 4)
@@ -30,18 +30,17 @@ function alien_piano(pitches) {
         })
             .sort(function (first_pitch, second_pitch) { return first_pitch.i - second_pitch.i; });
         if (optimal_4[0] !== undefined) {
-            // console.log(optimal_4[0]);
             if (index === 0) {
                 map_alien_piano.push(optimal_4[0].pitch);
                 return;
             }
-            else if (pitches[index--] < pitches[index]) {
+            else if (pitches[index - 1] < pitches[index]) {
                 //     should be higher
-                if (map_alien_piano[index--] < optimal_4[0].pitch) {
+                if (map_alien_piano[index - 1] < optimal_4[0].pitch) {
                     map_alien_piano.push(optimal_4[0].pitch);
                 }
-                else if (map_alien_piano[index--] < 'd') {
-                    map_alien_piano.push(String.fromCharCode(map_alien_piano[index--].charCodeAt(0) + 1));
+                else if (map_alien_piano[index - 1] < 'd') {
+                    map_alien_piano.push(String.fromCharCode(map_alien_piano[index - 1].charCodeAt(0) + 1));
                 }
                 else {
                     //    rule break
@@ -51,11 +50,11 @@ function alien_piano(pitches) {
             }
             else {
                 //     should be lower
-                if (map_alien_piano[index--] > optimal_4[0].pitch) {
+                if (map_alien_piano[index - 1] > optimal_4[0].pitch) {
                     map_alien_piano.push(optimal_4[0].pitch);
                 }
-                else if (map_alien_piano[index--] > 'a') {
-                    map_alien_piano.push(String.fromCharCode(map_alien_piano[index--].charCodeAt(0) - 1));
+                else if (map_alien_piano[index - 1] > 'a') {
+                    map_alien_piano.push(String.fromCharCode(map_alien_piano[index - 1].charCodeAt(0) - 1));
                 }
                 else {
                     //    rule break
@@ -64,7 +63,14 @@ function alien_piano(pitches) {
                 }
             }
         }
-        console.log(map_alien_piano);
     });
     return rule_break;
+}
+function logLetter(letter, next) {
+    if (next) {
+        console.log("Next to " + letter + ": " + String.fromCharCode(letter.charCodeAt(0) + 1));
+    }
+    else {
+        console.log("Previous to " + letter + ": " + String.fromCharCode(letter.charCodeAt(0) - 1));
+    }
 }

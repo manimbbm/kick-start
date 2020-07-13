@@ -21,7 +21,7 @@ function record_breaker(visitors) {
     for (let i = 0; i < visitors.length; i++) {
         if (visitors[i] > max) {
             max = visitors[i];
-            if (i+1 === visitors.length || visitors[i] > visitors[i+1]) {
+            if (visitors[i+1] === undefined || visitors[i] > visitors[i+1]) {
                 r_breaker++;
             }
         }

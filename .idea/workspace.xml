@@ -2,12 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5313d9a2-437c-4efb-a979-ea26134ccc66" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/round-d-2020/alien-piano-test.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/round-d-2020/alien-piano.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/round-d-2020/record.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/round-c-2020/stable-wall.ts" beforeDir="false" afterPath="$PROJECT_DIR$/round-c-2020/stable-wall.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/round-d-2020/record-breaker.js" beforeDir="false" afterPath="$PROJECT_DIR$/round-d-2020/record-breaker.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/round-d-2020/alien-piano.js" beforeDir="false" afterPath="$PROJECT_DIR$/round-d-2020/alien-piano.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/round-d-2020/alien-piano.ts" beforeDir="false" afterPath="$PROJECT_DIR$/round-d-2020/alien-piano.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/round-d-2020/record-breaker.ts" beforeDir="false" afterPath="$PROJECT_DIR$/round-d-2020/record-breaker.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -102,7 +99,8 @@
       <workItem from="1594276023037" duration="1493000" />
       <workItem from="1594364232179" duration="1424000" />
       <workItem from="1594530975987" duration="7786000" />
-      <workItem from="1594540900059" duration="841000" />
+      <workItem from="1594540900059" duration="2068000" />
+      <workItem from="1594622044779" duration="1047000" />
     </task>
     <servers />
   </component>
@@ -129,10 +127,10 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="516" y="-593" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1591082537215">
+    <state x="516" y="-593" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1594623265268">
       <screen x="-127" y="-1027" width="1680" height="1027" />
     </state>
-    <state x="516" y="-593" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/-127.-1027.1680.1027/0.23.1440.877@-127.-1027.1680.1027" timestamp="1591082537215" />
+    <state x="516" y="-593" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/-127.-1027.1680.1027/0.23.1440.877@-127.-1027.1680.1027" timestamp="1594623265268" />
     <state x="378" y="-276" key="run.anything.popup" timestamp="1591080333038">
       <screen x="-127" y="-1027" width="1680" height="1027" />
     </state>
