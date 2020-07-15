@@ -11,7 +11,7 @@ for (var i = 1; i <= t; i++) {
     var A = readline().split(" ").map(function (x) { return +x; });
     console.log("Case #" + i + ": " + alien_piano(A));
 }
-function alien_piano(pitches) {
+function alien_piano_testset1(pitches) {
     var alien_pitches = ['a', 'b', 'c', 'd'];
     var map_alien_piano = [];
     var rule_break = 0;
@@ -66,11 +66,38 @@ function alien_piano(pitches) {
     });
     return rule_break;
 }
-function logLetter(letter, next) {
-    if (next) {
-        console.log("Next to " + letter + ": " + String.fromCharCode(letter.charCodeAt(0) + 1));
-    }
-    else {
-        console.log("Previous to " + letter + ": " + String.fromCharCode(letter.charCodeAt(0) - 1));
-    }
+function alien_piano(pitches) {
+    var rule_break = 0;
+    var down_counter = 0;
+    var up_counter = 0;
+    pitches.forEach(function (pitch, index) {
+        console.log(pitches[index - 1], pitches[index]);
+        if (pitches[index - 1] == pitches[index] || index === 0) {
+            console.log('same');
+            return;
+        }
+        else if (pitches[index - 1] < pitches[index]) {
+            //     should be higher
+            console.log('higher');
+            down_counter = 0;
+            if (up_counter == 3) {
+                rule_break++;
+                up_counter = 0;
+                return;
+            }
+            up_counter++;
+        }
+        else {
+            //     should be lower
+            console.log('lower');
+            up_counter = 0;
+            if (down_counter == 3) {
+                rule_break++;
+                down_counter = 0;
+                return;
+            }
+            down_counter++;
+        }
+    });
+    return rule_break;
 }
