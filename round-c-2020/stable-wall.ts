@@ -56,34 +56,16 @@ function stable_wall(arr) {
     // navigate from each node to the others starting from root node(s)
     console.log('nodes', nodes);
 
-    nodes.roots.forEach(function(root) {
+    let ans = nodes.roots.length > 0 ? nodes.roots.toString() : -1;
+    nodes.roots.forEach((root) => {
         console.log('root', root);
-        let visited: any[] = [];
-        let current = root;
-        let longest_branch: string = root;
-        console.log('longest', longest_branch);
-        while (visited.length <= nodes.nonRoots.length) {
-
-            //just draw/hand write next time
-            let elm = edges.find(e => e.substring(1,2) == current);
-            while ( visited.includes(elm.substring(0,1)) && )
-            for (let i = 0; i < edges.length; i++) {
-                if (edges[i].substring(1,2) == current) {
-                    current = edges[i].substring(0,1);
-                    longest_branch = longest_branch.concat(current);
-                    console.log('longest', longest_branch);
-                }
-            }
-
-            visited.push(current);
-            nodes.nonRoots.forEach(function (nonRoot) {
-                current = visited.includes(nonRoot) ? current : nonRoot;
-            });
-            console.log('visited', visited);
-            console.log('current', current);
-        }
+        console.log('ans', ans);
+        // print their children and so on and so forth
+        // right of an edge is at the bottom of a wall
+        edges.find(edge => edge.substring(1, 2) === root);
+        //...
     });
-    return;
+    return ans;
 }
 
 function addToNodes(node, nodes, isRoot?: boolean) {
