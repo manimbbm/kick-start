@@ -2,8 +2,8 @@ import {createBinary, forEachChild} from "typescript";
 
 const fs = require('fs');
 
-const input = fs.readFileSync('./stable-wall-test.txt', 'utf-8').trim().split('\n');
-// const input = fs.readFileSync(0, 'utf-8').trim().split('\n');
+// const input = fs.readFileSync('./stable-wall-test.txt', 'utf-8').trim().split('\n');
+const input = fs.readFileSync(0, 'utf-8').trim().split('\n');
 
 let line = 0
 function readline(){
@@ -17,7 +17,7 @@ for (let i = 1; i <= t; i++) {
     let arr = [];
     for (let j = 0; j < R; j++) {
         arr.push(readline().split('\n'));
-        console.log(arr);
+        // console.log(arr);
     }
     console.log(`Case #${i}: ${stable_wall(arr)}`)
 }
@@ -48,21 +48,33 @@ function stable_wall(arr) {
                 addToNodes(top_letter, nodes, false);
                 addToNodes(bottom_letter, nodes);
             }
-            console.log('edges', edges);
+            // console.log('edges', edges);
         }
     }
     // check if root: the letter without parent, or the one that only comes up on the right of an edge √
     roots(nodes);
     // navigate from each node to the others starting from root node(s)
-    console.log('nodes', nodes);
+    // console.log('nodes', nodes);
 
     let ans = nodes.roots.length > 0 ? nodes.roots.toString() : -1;
     nodes.roots.forEach((root) => {
-        console.log('root', root);
-        console.log('ans', ans);
+        // console.log('root', root);
+        // console.log('ans', ans);
         // print their children and so on and so forth
         // right of an edge is at the bottom of a wall
-        edges.find(edge => edge.substring(1, 2) === root);
+        let current = root;
+        let children: string[] = edges.filter(edge => edge.substring(1, 2) === current);
+        while (children.length > 0) {
+            children.forEach((child, index) => {
+                // console.log('child', child);
+                ans += child.substring(0, 1);
+                children.push(...edges.filter(edge => edge.substring(1, 2) === child.substring(0, 1)));
+                // console.log('edges.filter(edge => edge.substring(1, 2) === child)', edges.filter(edge => edge.substring(1, 2) === child.substring(0, 1)));
+                children.splice(index, 1);
+            })
+            // console.log('while children ans', ans);
+            // console.log('children', children);
+        }
         //...
     });
     return ans;
