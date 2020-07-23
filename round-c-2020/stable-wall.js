@@ -1,8 +1,6 @@
-"use strict";
-exports.__esModule = true;
 var fs = require('fs');
-// const input = fs.readFileSync('./stable-wall-test.txt', 'utf-8').trim().split('\n');
-var input = fs.readFileSync(0, 'utf-8').trim().split('\n');
+var input = fs.readFileSync('./stable-wall-test.txt', 'utf-8').trim().split('\n');
+// const input = fs.readFileSync(0, 'utf-8').trim().split('\n');
 var line = 0;
 function readline() {
     return input[line++];
@@ -13,7 +11,6 @@ for (var i = 1; i <= t; i++) {
     var arr = [];
     for (var j = 0; j < R; j++) {
         arr.push(readline().split('\n'));
-        // console.log(arr);
     }
     console.log("Case #" + i + ": " + stable_wall(arr));
 }
@@ -49,7 +46,7 @@ function stable_wall(arr) {
     roots(nodes);
     // navigate from each node to the others starting from root node(s)
     // console.log('nodes', nodes);
-    var ans = nodes.roots.length > 0 ? nodes.roots.toString() : -1;
+    var ans = nodes.roots.length > 0 ? nodes.roots.toString() : "-1";
     nodes.roots.forEach(function (root) {
         // console.log('root', root);
         // console.log('ans', ans);
@@ -58,17 +55,27 @@ function stable_wall(arr) {
         var current = root;
         var children = edges.filter(function (edge) { return edge.substring(1, 2) === current; });
         while (children.length > 0) {
-            children.forEach(function (child, index) {
+            var _loop_1 = function (i) {
+                var child = children[i];
                 // console.log('child', child);
+                if (ans.includes(child.substring(0, 1))) {
+                    // console.log('contains cycle');
+                    //contains cycle
+                    ans = "-1";
+                    return { value: void 0 };
+                }
                 ans += child.substring(0, 1);
                 children.push.apply(children, edges.filter(function (edge) { return edge.substring(1, 2) === child.substring(0, 1); }));
                 // console.log('edges.filter(edge => edge.substring(1, 2) === child)', edges.filter(edge => edge.substring(1, 2) === child.substring(0, 1)));
-                children.splice(index, 1);
-            });
-            // console.log('while children ans', ans);
-            // console.log('children', children);
+                children.splice(i, 1);
+            };
+            for (var i = 0; i < children.length; i++) {
+                var state_1 = _loop_1(i);
+                if (typeof state_1 === "object")
+                    return state_1.value;
+            }
         }
-        //...
+    //** appears to be taking more than 20 secs... try to optimize
     });
     return ans;
 }
