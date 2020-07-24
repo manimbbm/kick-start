@@ -20,6 +20,7 @@ for (let i = 1; i <= t; i++) {
 }
 
 function stable_wall(arr) {
+    console.time('stable wall');
     let edges = [];
     let nodes = {
         ids: [],
@@ -46,22 +47,22 @@ function stable_wall(arr) {
     nodes.roots.forEach((root) => {
         // print their children and so on and so forth
         // right of an edge is at the bottom of a wall
-        let current = root;
-        let children: string[] = edges.filter(edge => edge.substring(1, 2) === current);
-        while (children.length > 0) {
-            for (let i = 0; i < children.length; i++) {
-                let child = children[i];
-                if (ans.includes(child.substring(0, 1))) {
+        let edges_to_visit: string[] = edges.filter(edge => edge.substring(1, 2) === root);
+        while (edges_to_visit.length > 0) {
+            for (let i = 0; i < edges_to_visit.length; i++) {
+                let child = edges_to_visit[i].substring(0, 1);
+                if (ans.includes(child)) {
+                    //wrong check
                     ans = "-1";
                     return;
                 }
-                ans += child.substring(0, 1);
-                children.push(...edges.filter(edge => edge.substring(1, 2) === child.substring(0, 1)));
-                children.splice(i, 1);
+                ans += child;
+                edges_to_visit.push(...edges.filter(edge => edge.substring(1, 2) === child));
+                edges_to_visit.splice(i, 1);
             }
         }
     });
-    // CONTINUE appears to be taking more than 20 seconds
+    console.timeEnd('stable wall');
     return ans;
 }
 

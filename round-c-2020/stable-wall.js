@@ -14,13 +14,8 @@ for (var i = 1; i <= t; i++) {
     }
     console.log("Case #" + i + ": " + stable_wall(arr));
 }
-// idea: check adjacent lines the dependency relationship
-// ZOAAMM {0, 1} = ZZ, OO, AA, AO, MM -> AO
-// ZOAOMM {1, 2} = ZZ, OO, AO,  MO, MM -> AO, MO
-// ZOOOOM {2, 3} = ZZ, OZ, OO, MM -> OZ
-// ZZZZOM
-// then I have to build a tree (make sure there are no cycles)
 function stable_wall(arr) {
+    console.time('stable wall');
     var edges = [];
     var nodes = {
         ids: [],
@@ -35,48 +30,38 @@ function stable_wall(arr) {
             var bottom_letter = bottom_row.substring(j, j + 1);
             if (top_letter !== bottom_letter && edges.indexOf(top_letter + bottom_letter) == -1) {
                 edges.push(top_letter + bottom_letter);
-                // get the nodes √
                 addToNodes(top_letter, nodes, false);
                 addToNodes(bottom_letter, nodes);
             }
-            // console.log('edges', edges);
         }
     }
     // check if root: the letter without parent, or the one that only comes up on the right of an edge √
     roots(nodes);
     // navigate from each node to the others starting from root node(s)
-    // console.log('nodes', nodes);
     var ans = nodes.roots.length > 0 ? nodes.roots.toString() : "-1";
     nodes.roots.forEach(function (root) {
-        // console.log('root', root);
-        // console.log('ans', ans);
         // print their children and so on and so forth
         // right of an edge is at the bottom of a wall
-        var current = root;
-        var children = edges.filter(function (edge) { return edge.substring(1, 2) === current; });
-        while (children.length > 0) {
+        var edges_to_visit = edges.filter(function (edge) { return edge.substring(1, 2) === root; });
+        while (edges_to_visit.length > 0) {
             var _loop_1 = function (i) {
-                var child = children[i];
-                // console.log('child', child);
-                if (ans.includes(child.substring(0, 1))) {
-                    // console.log('contains cycle');
-                    //contains cycle
+                var child = edges_to_visit[i].substring(0, 1);
+                if (ans.includes(child)) {
                     ans = "-1";
                     return { value: void 0 };
                 }
-                ans += child.substring(0, 1);
-                children.push.apply(children, edges.filter(function (edge) { return edge.substring(1, 2) === child.substring(0, 1); }));
-                // console.log('edges.filter(edge => edge.substring(1, 2) === child)', edges.filter(edge => edge.substring(1, 2) === child.substring(0, 1)));
-                children.splice(i, 1);
+                ans += child;
+                edges_to_visit.push.apply(edges_to_visit, edges.filter(function (edge) { return edge.substring(1, 2) === child; }));
+                edges_to_visit.splice(i, 1);
             };
-            for (var i = 0; i < children.length; i++) {
+            for (var i = 0; i < edges_to_visit.length; i++) {
                 var state_1 = _loop_1(i);
                 if (typeof state_1 === "object")
                     return state_1.value;
             }
         }
-    //** appears to be taking more than 20 secs... try to optimize
     });
+    console.timeEnd('stable wall');
     return ans;
 }
 function addToNodes(node, nodes, isRoot) {
