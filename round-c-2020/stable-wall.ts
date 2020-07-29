@@ -40,6 +40,7 @@ function stable_wall(arr) {
             }
         }
     }
+    console.log('edges', edges);
     // check if root: the letter without parent, or the one that only comes up on the right of an edge √
     roots(nodes);
     // navigate from each node to the others starting from root node(s)
@@ -53,6 +54,7 @@ function stable_wall(arr) {
                 let child = edges_to_visit[i].substring(0, 1);
                 if (ans.includes(child)) {
                     //wrong check
+                    //how to check if there is a cycle
                     ans = "-1";
                     return;
                 }
