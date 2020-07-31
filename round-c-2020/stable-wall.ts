@@ -53,8 +53,11 @@ function stable_wall(arr) {
             for (let i = 0; i < edges_to_visit.length; i++) {
                 let child = edges_to_visit[i].substring(0, 1);
                 if (ans.includes(child)) {
+                    console.log('child', child);
+                    console.log('ans', ans);
                     //wrong check
                     //how to check if there is a cycle
+                    // missing topological order
                     ans = "-1";
                     return;
                 }

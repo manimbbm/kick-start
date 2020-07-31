@@ -48,6 +48,8 @@ function stable_wall(arr) {
             var _loop_1 = function (i) {
                 var child = edges_to_visit[i].substring(0, 1);
                 if (ans.includes(child)) {
+                    console.log('child', child);
+                    console.log('ans', ans);
                     //wrong check
                     //how to check if there is a cycle
                     ans = "-1";
