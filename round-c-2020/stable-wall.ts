@@ -30,9 +30,11 @@ function stable_wall(arr) {
     for (let i = 0; i < arr.length - 1; i++) {
         let top_row = arr[i].toString();
         let bottom_row = arr[i + 1].toString();
-        for (let j = 0; j < top_row.length - 1; j++) {
+        for (let j = 0; j < top_row.length; j++) {
             let top_letter = top_row.substring(j, j + 1);
             let bottom_letter = bottom_row.substring(j, j + 1);
+            // console.log('top_letter', top_letter);
+            // console.log('bottom_letter', bottom_letter);
             if (top_letter !== bottom_letter && edges.indexOf(top_letter + bottom_letter) == -1) {
                 edges.push(top_letter + bottom_letter);
                 addToNodes(top_letter, nodes, false);
@@ -51,12 +53,13 @@ function stable_wall(arr) {
         let edges_to_visit: string[] = edges.filter(edge => edge.substring(1, 2) === root);
         while (edges_to_visit.length > 0) {
             for (let i = 0; i < edges_to_visit.length; i++) {
+                // a letter can only be added if all its parents were added already
+                // OR Inverted logic: if they dont have any children left to add
                 let child = edges_to_visit[i].substring(0, 1);
                 if (ans.includes(child)) {
                     console.log('child', child);
                     console.log('ans', ans);
-                    //wrong check
-                    //how to check if there is a cycle
+                    // how to check if there is a cycle?
                     // missing topological order
                     ans = "-1";
                     return;
@@ -71,7 +74,21 @@ function stable_wall(arr) {
     return ans;
 }
 
-function addToNodes(node, nodes, isRoot?: boolean) {
+let addToAns = (node: string, ans: string, nodes): void => {
+    // start adding from the bottom up on the tree (
+    if (isRoot(node, nodes)) {
+        ans += node;
+        return;
+    }
+
+
+}
+
+let isRoot = (node: string, nodes: { roots: string[] }): boolean => {
+    return nodes.roots.indexOf(node) !== -1;
+}
+
+let addToNodes = (node, nodes, isRoot?: boolean): void => {
     if (nodes.ids.indexOf(node) == -1) {
         nodes.ids.push(node);
     }
@@ -80,7 +97,7 @@ function addToNodes(node, nodes, isRoot?: boolean) {
     }
 }
 
-function roots(nodes) {
+let roots = (nodes): void => {
     nodes.roots = nodes.ids.slice();
     nodes.nonRoots.forEach((node) => {
         nodes.roots.splice(nodes.roots.indexOf(node), 1);

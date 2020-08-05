@@ -25,9 +25,11 @@ function stable_wall(arr) {
     for (var i = 0; i < arr.length - 1; i++) {
         var top_row = arr[i].toString();
         var bottom_row = arr[i + 1].toString();
-        for (var j = 0; j < top_row.length - 1; j++) {
+        for (var j = 0; j < top_row.length; j++) {
             var top_letter = top_row.substring(j, j + 1);
             var bottom_letter = bottom_row.substring(j, j + 1);
+            console.log('top_letter', top_letter);
+            console.log('bottom_letter', bottom_letter);
             if (top_letter !== bottom_letter && edges.indexOf(top_letter + bottom_letter) == -1) {
                 edges.push(top_letter + bottom_letter);
                 addToNodes(top_letter, nodes, false);
@@ -52,6 +54,7 @@ function stable_wall(arr) {
                     console.log('ans', ans);
                     //wrong check
                     //how to check if there is a cycle
+                    // missing topological order
                     ans = "-1";
                     return { value: void 0 };
                 }
