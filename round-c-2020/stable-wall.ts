@@ -47,7 +47,7 @@ function stable_wall(arr) {
     roots(nodes);
     // navigate from each node to the others starting from root node(s)
     let ans: string = nodes.roots.length > 0 ? nodes.roots.toString() : "-1";
-    nodes.roots.forEach((root) => {
+    nodes.roots.forEach((root) => {c
         // print their children and so on and so forth
         // right of an edge is at the bottom of a wall
         let edges_to_visit: string[] = edges.filter(edge => edge.substring(1, 2) === root);
