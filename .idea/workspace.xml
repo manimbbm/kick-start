@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="5313d9a2-437c-4efb-a979-ea26134ccc66" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/round-c-2020/stable-wall.ts" beforeDir="false" afterPath="$PROJECT_DIR$/round-c-2020/stable-wall.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/round-c-2020/perfect-array.js" beforeDir="false" afterPath="$PROJECT_DIR$/round-c-2020/perfect-array.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,6 +105,8 @@
       <workItem from="1596608448395" duration="35000" />
       <workItem from="1596608494249" duration="2286000" />
       <workItem from="1596695200399" duration="1672000" />
+      <workItem from="1596781136390" duration="1935000" />
+      <workItem from="1597126112146" duration="293000" />
     </task>
     <servers />
   </component>
