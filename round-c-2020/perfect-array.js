@@ -47,3 +47,13 @@ function allSquaresBellowN(N) {
     }
     return squares;
 }
+function printNumbers(N) {
+    var i = 1;
+    var numbers = [+(Math.random() * 100).toFixed()];
+    while (i < N) {
+        numbers.push(+(Math.random() * 100).toFixed());
+        i++;
+    }
+    console.dir(numbers, { 'maxArrayLength': N });
+}
+printNumbers(1000);
