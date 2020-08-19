@@ -6,6 +6,7 @@
       <change beforePath="$PROJECT_DIR$/round-c-2020/perfect-array-test.txt" beforeDir="false" afterPath="$PROJECT_DIR$/round-c-2020/perfect-array-test.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/round-c-2020/perfect-array.js" beforeDir="false" afterPath="$PROJECT_DIR$/round-c-2020/perfect-array.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/round-c-2020/perfect-array.ts" beforeDir="false" afterPath="$PROJECT_DIR$/round-c-2020/perfect-array.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/utils.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,6 +42,7 @@
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
   </component>
   <component name="RecentsManager">
@@ -113,7 +115,13 @@
       <workItem from="1596781136390" duration="1935000" />
       <workItem from="1597126112146" duration="1523000" />
       <workItem from="1597212831916" duration="4040000" />
-      <workItem from="1597299792829" duration="2512000" />
+      <workItem from="1597299792829" duration="2973000" />
+      <workItem from="1597303507302" duration="435000" />
+      <workItem from="1597309801727" duration="243000" />
+      <workItem from="1597386038266" duration="1270000" />
+      <workItem from="1597733320586" duration="892000" />
+      <workItem from="1597818933577" duration="4000" />
+      <workItem from="1597818949927" duration="1945000" />
     </task>
     <servers />
   </component>
@@ -125,6 +133,7 @@
         <option value="$PROJECT_DIR$/round-d-2020/record-breaker.js" />
         <option value="$PROJECT_DIR$/round-d-2020/alien-piano.js" />
         <option value="$PROJECT_DIR$/round-c-2020/perfect-array.js" />
+        <option value="$PROJECT_DIR$/utils.js" />
       </list>
     </option>
   </component>
@@ -141,10 +150,15 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="201" y="-932" key="SettingsEditor" timestamp="1597301246719">
-      <screen x="-127" y="-1027" width="1680" height="1027" />
+    <state x="625" y="360" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1597819009254">
+      <screen x="0" y="23" width="1920" height="1057" />
+    </state>
+    <state x="625" y="360" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1920.1057/1067.1103.1440.877/1920.53.1680.1027@0.23.1920.1057" timestamp="1597819009254" />
+    <state x="375" y="121" key="SettingsEditor" timestamp="1597819109659">
+      <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="201" y="-932" key="SettingsEditor/-127.-1027.1680.1027/0.23.1440.877@-127.-1027.1680.1027" timestamp="1597301246719" />
+    <state x="375" y="121" key="SettingsEditor/0.23.1920.1057/1067.1103.1440.877/1920.53.1680.1027@0.23.1920.1057" timestamp="1597819109659" />
     <state x="516" y="-593" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1594623265268">
       <screen x="-127" y="-1027" width="1680" height="1027" />
     </state>
@@ -153,11 +167,12 @@
       <screen x="-127" y="-1027" width="1680" height="1027" />
     </state>
     <state x="378" y="-276" key="run.anything.popup/-127.-1027.1680.1027/0.23.1440.877@-127.-1027.1680.1027" timestamp="1591080333038" />
-    <state x="378" y="-863" width="670" height="676" key="search.everywhere.popup" timestamp="1596696097314">
-      <screen x="-127" y="-1027" width="1680" height="1027" />
+    <state x="577" y="192" width="766" height="696" key="search.everywhere.popup" timestamp="1597819082234">
+      <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="378" y="-863" width="670" height="676" key="search.everywhere.popup/-127.-1027.1680.1027/0.23.1440.877@-127.-1027.1680.1027" timestamp="1594540874305" />
     <state x="378" y="-863" width="670" height="676" key="search.everywhere.popup/0.23.1440.877/-127.-1027.1680.1027@-127.-1027.1680.1027" timestamp="1596696097314" />
     <state x="505" y="187" width="670" height="676" key="search.everywhere.popup/0.23.1680.1027@0.23.1680.1027" timestamp="1593500131306" />
+    <state x="577" y="192" width="766" height="696" key="search.everywhere.popup/0.23.1920.1057/1067.1103.1440.877/1920.53.1680.1027@0.23.1920.1057" timestamp="1597819082234" />
   </component>
 </project>
