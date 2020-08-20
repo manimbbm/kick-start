@@ -11,7 +11,7 @@ var squares_1e5 = allSquaresBellowN(1e5 * 100);
 console.time("total");
 for (var i = 1; i <= t; i++) {
     var N = readline();
-    var a = readline().split(" ").map(function (x) { return +x; });
+    var a = readline().split(" ").map(function (x) { return +x; });ick  
     // console.time(`perfectArray iteration ${i}`);
     // console.log(`Case #${i}: ${perfectArray(arr, N)}`);
     // console.timeEnd(`perfectArray iteration ${i}`);
