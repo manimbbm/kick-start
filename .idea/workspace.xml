@@ -2,13 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5313d9a2-437c-4efb-a979-ea26134ccc66" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/model.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/round-c-2020/candies.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/round-c-2020/test-candies.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/round-c-2020/perfect-array.js" beforeDir="false" afterPath="$PROJECT_DIR$/round-c-2020/perfect-array.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/round-c-2020/stable-wall.ts" beforeDir="false" afterPath="$PROJECT_DIR$/round-c-2020/stable-wall.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/round-c-2020/candies.ts" beforeDir="false" afterPath="$PROJECT_DIR$/round-c-2020/candies.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,7 +121,8 @@
       <workItem from="1597818933577" duration="4000" />
       <workItem from="1597818949927" duration="2681000" />
       <workItem from="1597824072428" duration="50000" />
-      <workItem from="1597905788071" duration="2208000" />
+      <workItem from="1597905788071" duration="2262000" />
+      <workItem from="1597990686393" duration="2606000" />
     </task>
     <servers />
   </component>
@@ -172,12 +169,12 @@
       <screen x="-127" y="-1027" width="1680" height="1027" />
     </state>
     <state x="378" y="-276" key="run.anything.popup/-127.-1027.1680.1027/0.23.1440.877@-127.-1027.1680.1027" timestamp="1591080333038" />
-    <state x="577" y="192" width="766" height="696" key="search.everywhere.popup" timestamp="1597905808553">
+    <state x="577" y="192" width="766" height="696" key="search.everywhere.popup" timestamp="1597990757905">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="378" y="-863" width="670" height="676" key="search.everywhere.popup/-127.-1027.1680.1027/0.23.1440.877@-127.-1027.1680.1027" timestamp="1594540874305" />
     <state x="378" y="-863" width="670" height="676" key="search.everywhere.popup/0.23.1440.877/-127.-1027.1680.1027@-127.-1027.1680.1027" timestamp="1596696097314" />
     <state x="505" y="187" width="670" height="676" key="search.everywhere.popup/0.23.1680.1027@0.23.1680.1027" timestamp="1593500131306" />
-    <state x="577" y="192" width="766" height="696" key="search.everywhere.popup/0.23.1920.1057/1067.1103.1440.877/1920.53.1680.1027@0.23.1920.1057" timestamp="1597905808553" />
+    <state x="577" y="192" width="766" height="696" key="search.everywhere.popup/0.23.1920.1057/1067.1103.1440.877/1920.53.1680.1027@0.23.1920.1057" timestamp="1597990757905" />
   </component>
 </project>
