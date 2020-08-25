@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5313d9a2-437c-4efb-a979-ea26134ccc66" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/round-e-2020/longest-arithmetic.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -122,7 +121,9 @@
       <workItem from="1597824072428" duration="50000" />
       <workItem from="1597905788071" duration="2262000" />
       <workItem from="1597990686393" duration="3146000" />
-      <workItem from="1598161388952" duration="4420000" />
+      <workItem from="1598161388952" duration="4735000" />
+      <workItem from="1598252788657" duration="589000" />
+      <workItem from="1598337102403" duration="2823000" />
     </task>
     <servers />
   </component>
@@ -158,6 +159,10 @@
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="625" y="360" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1920.1057/1067.1103.1440.877/1920.53.1680.1027@0.23.1920.1057" timestamp="1597819009254" />
+    <state x="770" y="279" key="RollbackChangesDialog" timestamp="1598339812612">
+      <screen x="0" y="23" width="1920" height="1057" />
+    </state>
+    <state x="770" y="279" key="RollbackChangesDialog/0.23.1920.1057/1067.1103.1440.877/1920.53.1680.1027@0.23.1920.1057" timestamp="1598339812612" />
     <state x="375" y="121" key="SettingsEditor" timestamp="1597819109659">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
