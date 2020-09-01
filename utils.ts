@@ -3,15 +3,20 @@ const fs = require('fs');
 function printRandomNumbers(N: number, max:number) {
     let i = 1;
     if (N && max) {
-        let numbers: number[] = [+(Math.random()*Math.pow(10, max.toString().length)).toFixed()];
-        while (i < N) {
-            numbers.push(+(Math.random()*Math.pow(10, max.toString().length)).toFixed());
-            i++;
+        let numbers: number[] = [];
+        while (i <= N) {
+            let rnd_n = Math.random()*Math.pow(10, max.toString().length);
+            if (rnd_n <= max) {
+                numbers.push(+rnd_n.toFixed());
+                i++;
+            }
         }
         fs.writeFileSync('utils.txt', numbers.join(' '));
         console.dir(numbers, {'maxArrayLength': N});
     } else {
-        console.log('Please pass on as parameters 1- the total random N you\'d like to generate and 2- the max value "node utils {N} {max}"\n' +
+        console.log('Usage "node utils {N} {max}"\n' +
+            '1- the total random N you\'d like to generate and \n' +
+            '2- the max value \n' +
             'Example: "node utils 5 900"');
     }
 

@@ -12,13 +12,16 @@ let t = readline();
 
 for (let i = 1; i <= t; i++) {
     let [n, a, b, c] = readline().split(" ").map(x => +x);
+    console.time(`case ${i}`);
     console.log(`Case #${i}: ${main(n, a, b, c)}`)
+    console.timeEnd(`case ${i}`);
 }
 
 function main(n, a, b, c) {
     let ans = "IMPOSSIBLE";
-    let p: number[][] = kPermute(n);
-    let arr = [];
+    // let p: number[][] = kPermute(n);
+    // kPermute
+    // let arr = [];
     let max = +(new Array<string>(n).fill(n).join(''));
     let start = +(new Array(n).fill(1).join(''));
     for (let i = start; i <= max; i++) {
@@ -31,7 +34,7 @@ function main(n, a, b, c) {
             }
         })
         if (!skip) {
-            arr.push(v.split('').map(x => +x ));
+            // arr.push(v.split('').map(x => +x ));
             // terrible solution, for each of the possible permutations I'd have to calc the visible left and visible right and check if their merge is the same
             let p = v.split('').map(x => +x );
             let p_a: number[] = visibleLeft(p); //array of the position where visible
@@ -97,7 +100,6 @@ function kPermute(n) {
         })
         if (!skip) {
             arr.push(v.split('').map(x => +x ));
-
         }
     }
     return arr;
