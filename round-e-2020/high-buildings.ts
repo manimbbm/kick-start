@@ -12,12 +12,12 @@ let t = readline();
 
 for (let i = 1; i <= t; i++) {
     let [n, a, b, c] = readline().split(" ").map(x => +x);
-    console.time(`case ${i}`);
-    console.log(`Case #${i}: ${main(n, a, b, c)}`)
-    console.timeEnd(`case ${i}`);
+    // console.time(`case ${i}`);
+    console.log(`Case #${i}: ${highBuildings(n, a, b, c)}`)
+    // console.timeEnd(`case ${i}`);
 }
 
-function main(n, a, b, c) {
+function highBuildingsGreedy(n, a, b, c) {
     let ans = "IMPOSSIBLE";
     // let p: number[][] = kPermute(n);
     // kPermute
@@ -51,6 +51,50 @@ function main(n, a, b, c) {
     }
     // console.dir(p, {'maxArrayLength': Math.pow(n, n)});
     return ans;
+}
+
+function highBuildings(n, a, b, c) {
+    if (a + b - c > n) {
+        return "IMPOSSIBLE";
+    }
+
+    if (c > 1) {
+        let p = 1;
+        let q = p + 1;
+        let pre_ans = [];
+        for (let i = 0; i < a - c; i++) {
+            pre_ans.push(p);
+        }
+        pre_ans.push(q);
+        for (let i = a - c + 1; i < 1 + n - b ; i++) {
+            pre_ans.push(p);
+        }
+        for (let i = 1 + n - b; i < n - b + c; i++) {
+            pre_ans.push(q);
+        }
+        for (let i = n - b + c; i < n; i++) {
+            pre_ans.push(p);
+        }
+        let v_a = visibleLeft(pre_ans);
+        let v_b = visibleRight(pre_ans);
+        let v_c = v_a.filter(pos => v_b.includes(pos));
+        console.log({
+            pre_ans,
+            v_a: v_a.length,
+            v_b: v_b.length,
+            v_c: v_c.length
+        });
+        return pre_ans.join(' ');
+    }
+
+    if (c === 1) {
+
+        if (a === 1 && b === 1) {
+            return "IMPOSSIBLE";
+        }
+    }
+
+    return "IMPOSSIBLE";
 }
 
 function visibleLeft(arr: number[]) {
