@@ -12,9 +12,9 @@ let t = readline();
 
 for (let i = 1; i <= t; i++) {
     let [n, a, b, c] = readline().split(" ").map(x => +x);
-    // console.time(`case ${i}`);
+    // // console.time(`case ${i}`);
     console.log(`Case #${i}: ${highBuildings(n, a, b, c)}`)
-    // console.timeEnd(`case ${i}`);
+    // // console.timeEnd(`case ${i}`);
 }
 
 function highBuildingsGreedy(n, a, b, c) {
@@ -39,17 +39,17 @@ function highBuildingsGreedy(n, a, b, c) {
             let p = v.split('').map(x => +x );
             let p_a: number[] = visibleLeft(p); //array of the position where visible
             let p_b: number[] = visibleRight(p);
-            // console.log({p_a, p_b});
+            // // console.log({p_a, p_b});
             let p_c = p_a.filter(value => p_b.includes(value));
             if (a === p_a.length && b === p_b.length && c === p_c.length) {
-                // console.log({p, a, b, c, p_a, p_b, p_c});
+                // // console.log({p, a, b, c, p_a, p_b, p_c});
 
                 ans = p.join(' ');
             }
 
         }
     }
-    // console.dir(p, {'maxArrayLength': Math.pow(n, n)});
+    // // console.dir(p, {'maxArrayLength': Math.pow(n, n)});
     return ans;
 }
 
@@ -78,18 +78,83 @@ function highBuildings(n, a, b, c) {
         let v_a = visibleLeft(pre_ans);
         let v_b = visibleRight(pre_ans);
         let v_c = v_a.filter(pos => v_b.includes(pos));
-        console.log({
-            pre_ans,
-            v_a: v_a.length,
-            v_b: v_b.length,
-            v_c: v_c.length
-        });
+        // console.log({
+        //     pre_ans,
+        //     v_a: v_a.length,
+        //     v_b: v_b.length,
+        //     v_c: v_c.length
+        // });
         return pre_ans.join(' ');
     }
 
     if (c === 1) {
-
+        if (a === 1 && b > 1) {
+            // console.log(`Case a === 1 && b > 1`);
+            let pre_ans = [3];
+            for (let i = 0; i < n - a - b + c; i++) {
+                pre_ans.push(1);
+            }
+            for (let i =  0; i < b - c; i++) {
+                pre_ans.push(2);
+            }
+            let v_a = visibleLeft(pre_ans);
+            let v_b = visibleRight(pre_ans);
+            let v_c = v_a.filter(pos => v_b.includes(pos));
+            // console.log({
+            //     pre_ans,
+            //     v_a: v_a.length,
+            //     v_b: v_b.length,
+            //     v_c: v_c.length
+            // });
+            return pre_ans.join(' ');
+        }
+        if (b === 1 && a > 1) {
+            // console.log(`Case b === 1 && a > 1`);
+            let pre_ans = [];
+            for (let i = 0; i < a - c; i++) {
+                pre_ans.push(2);
+            }
+            for (let i = 0; i < n - a - b + c; i++) {
+                pre_ans.push(1);
+            }
+            pre_ans.push(3);
+            let v_a = visibleLeft(pre_ans);
+            let v_b = visibleRight(pre_ans);
+            let v_c = v_a.filter(pos => v_b.includes(pos));
+            // console.log({
+            //     pre_ans,
+            //     v_a: v_a.length,
+            //     v_b: v_b.length,
+            //     v_c: v_c.length
+            // });
+            return pre_ans.join(' ');
+        }
+        if (b > 1 && a > 1) {
+            // console.log(`Case b > 1 && a > 1`);
+            let pre_ans = [];
+            for (let i = 0; i < a - c; i++) {
+                pre_ans.push(2);
+            }
+            for (let i = 0; i < n - a - b + c; i++) {
+                pre_ans.push(1);
+            }
+            pre_ans.push(3);
+            for (let i = 0; i < b - c; i++) {
+                pre_ans.push(2);
+            }
+            let v_a = visibleLeft(pre_ans);
+            let v_b = visibleRight(pre_ans);
+            let v_c = v_a.filter(pos => v_b.includes(pos));
+            // console.log({
+            //     pre_ans,
+            //     v_a: v_a.length,
+            //     v_b: v_b.length,
+            //     v_c: v_c.length
+            // });
+            return pre_ans.join(' ');
+        }
         if (a === 1 && b === 1) {
+            // console.log(`Case a === 1 && b === 1`);
             return "IMPOSSIBLE";
         }
     }
