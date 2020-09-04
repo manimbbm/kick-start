@@ -88,14 +88,21 @@ function highBuildings(n, a, b, c) {
     }
 
     if (c === 1) {
-        if (a === 1 && b > 1) {
-            // console.log(`Case a === 1 && b > 1`);
-            let pre_ans = [3];
-            for (let i = 0; i < n - a - b + c; i++) {
+        if (a + b - c === n) {
+            // console.log(`Case a + b - c === n`);
+            let pre_ans = [];
+            for (let i = 0; i < a - c; i++) {
                 pre_ans.push(1);
             }
-            for (let i =  0; i < b - c; i++) {
+            pre_ans.push(2);
+            for (let i = a - c + 1; i < 1 + n - b ; i++) {
+                pre_ans.push(1);
+            }
+            for (let i = 1 + n - b; i < n - b + c; i++) {
                 pre_ans.push(2);
+            }
+            for (let i = n - b + c; i < n; i++) {
+                pre_ans.push(1);
             }
             let v_a = visibleLeft(pre_ans);
             let v_b = visibleRight(pre_ans);
@@ -108,39 +115,28 @@ function highBuildings(n, a, b, c) {
             // });
             return pre_ans.join(' ');
         }
-        if (b === 1 && a > 1) {
-            // console.log(`Case b === 1 && a > 1`);
+        if (a > 1  || b > 1) {
+            // console.log(`Case a > 1  || b > 1`);
             let pre_ans = [];
             for (let i = 0; i < a - c; i++) {
                 pre_ans.push(2);
             }
-            for (let i = 0; i < n - a - b + c; i++) {
-                pre_ans.push(1);
-            }
-            pre_ans.push(3);
-            let v_a = visibleLeft(pre_ans);
-            let v_b = visibleRight(pre_ans);
-            let v_c = v_a.filter(pos => v_b.includes(pos));
-            // console.log({
-            //     pre_ans,
-            //     v_a: v_a.length,
-            //     v_b: v_b.length,
-            //     v_c: v_c.length
-            // });
-            return pre_ans.join(' ');
-        }
-        if (b > 1 && a > 1) {
-            // console.log(`Case b > 1 && a > 1`);
-            let pre_ans = [];
-            for (let i = 0; i < a - c; i++) {
-                pre_ans.push(2);
-            }
-            for (let i = 0; i < n - a - b + c; i++) {
-                pre_ans.push(1);
-            }
-            pre_ans.push(3);
-            for (let i = 0; i < b - c; i++) {
-                pre_ans.push(2);
+            if (a > 1) {
+                for (let i = 0; i < n - a - b + c; i++) {
+                    pre_ans.push(1);
+                }
+                pre_ans.push(3);
+                for (let i = 0; i < b - c; i++) {
+                    pre_ans.push(2);
+                }
+            } else {
+                pre_ans.push(3);
+                for (let i = 0; i < n - a - b + c; i++) {
+                    pre_ans.push(1);
+                }
+                for (let i = 0; i < b - c; i++) {
+                    pre_ans.push(2);
+                }
             }
             let v_a = visibleLeft(pre_ans);
             let v_b = visibleRight(pre_ans);
