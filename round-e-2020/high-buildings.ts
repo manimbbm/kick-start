@@ -18,7 +18,7 @@ for (let i = 1; i <= t; i++) {
 }
 
 function highBuildingsGreedy(n, a, b, c) {
-    let ans = "IMPOSSIBLE";
+    let ans = 'IMPOSSIBLE';
     // let p: number[][] = kPermute(n);
     // kPermute
     // let arr = [];
@@ -54,26 +54,26 @@ function highBuildingsGreedy(n, a, b, c) {
 }
 
 function highBuildings(n, a, b, c) {
-    if (a + b - c > n) {
-        return "IMPOSSIBLE";
+    if (a + b - c > n || (a + b - c == 1 && n >= 2)) {
+        return 'IMPOSSIBLE';
+    } else if (n === 1) {
+        return '1'
     }
 
     if (c > 1) {
-        let p = 1;
-        let q = p + 1;
         let pre_ans = [];
         for (let i = 0; i < a - c; i++) {
-            pre_ans.push(p);
+            pre_ans.push(1);
         }
-        pre_ans.push(q);
-        for (let i = a - c + 1; i < 1 + n - b ; i++) {
-            pre_ans.push(p);
+        pre_ans.push(2);
+        for (let i = 0; i < n - a - b + c ; i++) {
+            pre_ans.push(1);
         }
-        for (let i = 1 + n - b; i < n - b + c; i++) {
-            pre_ans.push(q);
+        for (let i = 1; i < c; i++) {
+            pre_ans.push(2);
         }
-        for (let i = n - b + c; i < n; i++) {
-            pre_ans.push(p);
+        for (let i = 0; i < b - c; i++) {
+            pre_ans.push(1);
         }
         let v_a = visibleLeft(pre_ans);
         let v_b = visibleRight(pre_ans);
@@ -94,14 +94,10 @@ function highBuildings(n, a, b, c) {
             for (let i = 0; i < a - c; i++) {
                 pre_ans.push(1);
             }
-            pre_ans.push(2);
-            for (let i = a - c + 1; i < 1 + n - b ; i++) {
-                pre_ans.push(1);
-            }
-            for (let i = 1 + n - b; i < n - b + c; i++) {
+            for (let i = 0; i < c; i++) {
                 pre_ans.push(2);
             }
-            for (let i = n - b + c; i < n; i++) {
+            for (let i = 0; i < b - c; i++) {
                 pre_ans.push(1);
             }
             let v_a = visibleLeft(pre_ans);
@@ -114,29 +110,19 @@ function highBuildings(n, a, b, c) {
             //     v_c: v_c.length
             // });
             return pre_ans.join(' ');
-        }
-        if (a > 1  || b > 1) {
+        } else if (a > 1 || b > 1) {
             // console.log(`Case a > 1  || b > 1`);
             let pre_ans = [];
-            for (let i = 0; i < a - c; i++) {
+            pre_ans.push(2);
+            for (let i = 0; i < n - a - b + c; i++) {
+                pre_ans.push(1);
+            }
+            for (let i = 1; i < a - c; i++) {
                 pre_ans.push(2);
             }
-            if (a > 1) {
-                for (let i = 0; i < n - a - b + c; i++) {
-                    pre_ans.push(1);
-                }
-                pre_ans.push(3);
-                for (let i = 0; i < b - c; i++) {
-                    pre_ans.push(2);
-                }
-            } else {
-                pre_ans.push(3);
-                for (let i = 0; i < n - a - b + c; i++) {
-                    pre_ans.push(1);
-                }
-                for (let i = 0; i < b - c; i++) {
-                    pre_ans.push(2);
-                }
+            pre_ans.push(3);
+            for (let i = 0; i < b - c; i++) {
+                pre_ans.push(2);
             }
             let v_a = visibleLeft(pre_ans);
             let v_b = visibleRight(pre_ans);
@@ -148,14 +134,13 @@ function highBuildings(n, a, b, c) {
             //     v_c: v_c.length
             // });
             return pre_ans.join(' ');
-        }
-        if (a === 1 && b === 1) {
+        } else if (a === 1 && b === 1) {
             // console.log(`Case a === 1 && b === 1`);
-            return "IMPOSSIBLE";
+            return 'IMPOSSIBLE';
         }
     }
 
-    return "IMPOSSIBLE";
+    return 'IMPOSSIBLE';
 }
 
 function visibleLeft(arr: number[]) {
