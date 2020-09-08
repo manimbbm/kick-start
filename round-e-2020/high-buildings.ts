@@ -1,3 +1,5 @@
+import assert = require("assert");
+
 const fs = require('fs');
 
 const input = fs.readFileSync('./high-buildings-test.txt', 'utf-8').trim().split('\n');
@@ -13,6 +15,9 @@ let t = readline();
 for (let i = 1; i <= t; i++) {
     let [n, a, b, c] = readline().split(" ").map(x => +x);
     // // console.time(`case ${i}`);
+    assert(1 <= c && c <= n);
+    assert(c <= a && a <= n);
+    assert(c <= b && b <= n);
     console.log(`Case #${i}: ${highBuildings(n, a, b, c)}`)
     // // console.timeEnd(`case ${i}`);
 }
@@ -54,124 +59,68 @@ function highBuildingsGreedy(n, a, b, c) {
 }
 
 function highBuildings(n, a, b, c) {
-    if (a + b - c > n || (a + b - c == 1 && n >= 2)) {
+    if ((a + b - c) > n || (a + b - c === 1 && n >= 2)) {
         return 'IMPOSSIBLE';
     } else if (n === 1) {
-        return '1'
-    }
-
-    if (c > 1) {
+        return '1';
+    } else if (n === 2) {
+        if (c === 2) {
+            return '1 1';
+        } else if (a === 2) {
+            return '1 2';
+        } else if (b === 2) {
+            return '2 1';
+        } else assert(false);
+    } else {
         let pre_ans = [];
         for (let i = 0; i < a - c; i++) {
-            pre_ans.push(1);
-        }
-        pre_ans.push(2);
-        for (let i = 0; i < n - a - b + c ; i++) {
-            pre_ans.push(1);
-        }
-        for (let i = 1; i < c; i++) {
             pre_ans.push(2);
+        }
+        for (let i = 0; i < c; i++) {
+            pre_ans.push(3);
         }
         for (let i = 0; i < b - c; i++) {
-            pre_ans.push(1);
-        }
-        let v_a = visibleLeft(pre_ans);
-        let v_b = visibleRight(pre_ans);
-        let v_c = v_a.filter(pos => v_b.includes(pos));
-        // console.log({
-        //     pre_ans,
-        //     v_a: v_a.length,
-        //     v_b: v_b.length,
-        //     v_c: v_c.length
-        // });
-        return pre_ans.join(' ');
-    }
-
-    if (c === 1) {
-        if (a + b - c === n) {
-            // console.log(`Case a + b - c === n`);
-            let pre_ans = [];
-            for (let i = 0; i < a - c; i++) {
-                pre_ans.push(1);
-            }
-            for (let i = 0; i < c; i++) {
-                pre_ans.push(2);
-            }
-            for (let i = 0; i < b - c; i++) {
-                pre_ans.push(1);
-            }
-            let v_a = visibleLeft(pre_ans);
-            let v_b = visibleRight(pre_ans);
-            let v_c = v_a.filter(pos => v_b.includes(pos));
-            // console.log({
-            //     pre_ans,
-            //     v_a: v_a.length,
-            //     v_b: v_b.length,
-            //     v_c: v_c.length
-            // });
-            return pre_ans.join(' ');
-        } else if (a > 1 || b > 1) {
-            // console.log(`Case a > 1  || b > 1`);
-            let pre_ans = [];
             pre_ans.push(2);
-            for (let i = 0; i < n - a - b + c; i++) {
-                pre_ans.push(1);
-            }
-            for (let i = 1; i < a - c; i++) {
-                pre_ans.push(2);
-            }
-            pre_ans.push(3);
-            for (let i = 0; i < b - c; i++) {
-                pre_ans.push(2);
-            }
-            let v_a = visibleLeft(pre_ans);
-            let v_b = visibleRight(pre_ans);
-            let v_c = v_a.filter(pos => v_b.includes(pos));
-            // console.log({
-            //     pre_ans,
-            //     v_a: v_a.length,
-            //     v_b: v_b.length,
-            //     v_c: v_c.length
-            // });
-            return pre_ans.join(' ');
-        } else if (a === 1 && b === 1) {
-            // console.log(`Case a === 1 && b === 1`);
-            return 'IMPOSSIBLE';
         }
+        let pre_ans_2 = [];
+        if (n - a - b + c > 0) {
+            // console.log({
+            //     total: pre_ans,
+            //     initial_slice: pre_ans.slice(0,1),
+            //     final_slice: pre_ans.slice(1,pre_ans.length),
+            // });
+            pre_ans_2.push(pre_ans.slice(0,1));
+            for (let i = 0; i < n - a - b + c; i++) {
+                pre_ans_2.push(1);
+            }
+            //FIX
+            pre_ans_2.concat(pre_ans.slice(1, pre_ans.length));
     }
-
-    return 'IMPOSSIBLE';
+        return pre_ans_2.length > 0 ? pre_ans_2.join(' ') : pre_ans.join(' ');
+    }
 }
 
 function visibleLeft(arr: number[]) {
-    let pos_visible = [0];
-
+    let pos_visible = [];
     let max = arr[0];
-    if (arr.length > 1) {
-        for (let i = 1; i < arr.length; i++) {
-            if (max <= arr[i]) {
-                pos_visible.push(i);
-                max = arr[i];
-            }
+    for (let i = 0; i < arr.length; i++) {
+        if (max <= arr[i]) {
+            pos_visible.push(i);
+            max = arr[i];
         }
     }
-
     return pos_visible;
 }
 
 function visibleRight(arr: number[]) {
-    let pos_visible = [arr.length - 1];
-
+    let pos_visible = [];
     let max = arr[arr.length - 1];
-    if (arr.length > 1) {
-        for (let i = arr.length - 2; i >= 0; i--) {
-            if (max <= arr[i]) {
-                pos_visible.push(i);
-                max = arr[i];
-            }
+    for (let i = arr.length - 1; i >= 0; i--) {
+        if (max <= arr[i]) {
+            pos_visible.push(i);
+            max = arr[i];
         }
     }
-
     return pos_visible;
 }
 
