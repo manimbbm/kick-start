@@ -20,6 +20,6 @@ for (let i = 1; i <= t; i++) {
 }
 
 function main(arr) {
-	return arr;
+	return 1;
 }
 
