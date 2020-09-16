@@ -70,7 +70,9 @@ function highBuildings(n, a, b, c) {
             return '1 2';
         } else if (b === 2) {
             return '2 1';
-        } else assert(false);
+        } else {
+            assert(false);
+        }
     } else {
         let pre_ans = [];
         for (let i = 0; i < a - c; i++) {
@@ -83,18 +85,23 @@ function highBuildings(n, a, b, c) {
             pre_ans.push(2);
         }
         let pre_ans_2 = [];
-        if (n - a - b + c > 0) {
+        let extras = n - (a + b - c);
+        if (extras > 0) {
             // console.log({
             //     total: pre_ans,
             //     initial_slice: pre_ans.slice(0,1),
             //     final_slice: pre_ans.slice(1,pre_ans.length),
             // });
-            pre_ans_2.push(pre_ans.slice(0,1));
-            for (let i = 0; i < n - a - b + c; i++) {
+            pre_ans_2.push(+pre_ans.slice(0,1));
+            for (let i = 0; i < extras; i++) {
                 pre_ans_2.push(1);
             }
-            //FIX
-            pre_ans_2.concat(pre_ans.slice(1, pre_ans.length));
+            pre_ans.forEach((v, index) => {
+                // console.log({v, index, pre_ans_2, pre_ans});
+                if (index > 0) {
+                    pre_ans_2.push(v);
+                }
+            });
     }
         return pre_ans_2.length > 0 ? pre_ans_2.join(' ') : pre_ans.join(' ');
     }
