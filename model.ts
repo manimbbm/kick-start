@@ -11,10 +11,10 @@ function readline(){
 let t = readline();
 
 for (let i = 1; i <= t; i++) {
-	let [A, B] = readline().split(" ").map(x => +x);
+	let [A, B] = readline().split('').map(x => +x);
 	let arr = [];
 	for (let j = 0; j <= A; j++) {
-		arr.push(readline().split("\n"));
+		arr.push(readline().split('\n'));
 	}
 	console.log(`Case #${i}: ${main(arr)}`)
 }

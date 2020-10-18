@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="5313d9a2-437c-4efb-a979-ea26134ccc66" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/model.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils.txt" beforeDir="false" afterPath="$PROJECT_DIR$/utils.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -142,7 +144,13 @@
       <workItem from="1600842214313" duration="1722000" />
       <workItem from="1600853394867" duration="116000" />
       <workItem from="1600929168103" duration="599000" />
-      <workItem from="1601967881118" duration="2202000" />
+      <workItem from="1601967881118" duration="2800000" />
+      <workItem from="1601971262570" duration="97000" />
+      <workItem from="1602053881261" duration="2084000" />
+      <workItem from="1602142090002" duration="772000" />
+      <workItem from="1602226671439" duration="1038000" />
+      <workItem from="1602230708819" duration="4000" />
+      <workItem from="1603022855846" duration="8584000" />
     </task>
     <servers />
   </component>
@@ -159,6 +167,9 @@
         <option value="$PROJECT_DIR$/round-e-2020/longest-arithmetic.js" />
         <option value="$PROJECT_DIR$/round-e-2020/high-buildings.js" />
         <option value="$PROJECT_DIR$/round-e-2020/toys.js" />
+        <option value="$PROJECT_DIR$/round-g-2020/kick-start.js" />
+        <option value="$PROJECT_DIR$/round-g-2020/max-coins.js" />
+        <option value="$PROJECT_DIR$/round-g-2020/comb-lock.js" />
       </list>
     </option>
   </component>
@@ -197,13 +208,12 @@
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="577" y="796" key="run.anything.popup/0.23.1920.1057/1920.303.1280.777@0.23.1920.1057" timestamp="1599548645463" />
-    <state x="577" y="192" width="766" height="696" key="search.everywhere.popup" timestamp="1601968375812">
+    <state x="577" y="192" width="766" height="696" key="search.everywhere.popup" timestamp="1603032071720">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="378" y="-863" width="670" height="676" key="search.everywhere.popup/-127.-1027.1680.1027/0.23.1440.877@-127.-1027.1680.1027" timestamp="1594540874305" />
     <state x="378" y="-863" width="670" height="676" key="search.everywhere.popup/0.23.1440.877/-127.-1027.1680.1027@-127.-1027.1680.1027" timestamp="1596696097314" />
-    <state x="505" y="187" width="670" height="676" key="search.everywhere.popup/0.23.1680.1027@0.23.1680.1027" timestamp="1593500131306" />
     <state x="577" y="192" width="766" height="696" key="search.everywhere.popup/0.23.1920.1057/1067.1103.1440.877/1920.53.1680.1027@0.23.1920.1057" timestamp="1597990757905" />
-    <state x="577" y="192" width="766" height="696" key="search.everywhere.popup/0.23.1920.1057/1920.303.1280.777@0.23.1920.1057" timestamp="1601968375812" />
+    <state x="577" y="192" width="766" height="696" key="search.everywhere.popup/0.23.1920.1057/1920.303.1280.777@0.23.1920.1057" timestamp="1603032071720" />
   </component>
 </project>
