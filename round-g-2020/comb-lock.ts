@@ -13,87 +13,45 @@ let t = readline();
 for (let i = 1; i <= t; i++) {
     let [W, N] = readline().split(' ').map(x => +x);
     let arr = readline().split(' ').map(x => +x);
-    console.log(`Case #${i}: ${main(arr, W, N)}`)
+    // console.time('WxN');
+    // console.log(`Case #${i}: ${main_WxN(arr, W, N)}`);
+    // console.timeEnd('WxN');
+    console.time('WxW');
+    console.log(`Case #${i}: ${main_WxW(arr, W, N)}`);
+    console.timeEnd('WxW');
+    // console.time('WxW');
+    // console.log(`Case #${i}: ${main_WxlogW(arr, W, N)}`);
+    // console.timeEnd('WxW');
 }
 
-function main(arr, W, N) {
-    //console.log({arr, W, N})
-    //greedy, get all sums for each number
+function main_WxN(arr, W, N) {
+    //greedy, get all sums for each number O(WxN)
+    let distsPerN: number[] = [];
+
+    for (let i = 1; i <= N; i++) {
+        let sum = 0;
+        arr.forEach((curr, index) => {
+            sum += dist(i, curr, N);
+        })
+        // console.log({i, sum});
+        distsPerN.push(sum);
+    }
+
+    return Math.min(...distsPerN);
+}
+function main_WxW(arr, W, N) {
+    //greedy, get all sums for each given wheel value O(WxW)
     arr.sort((a, b) => a - b);
     let distsPerN: number[] = [];
 
-    let left = 0, right = 0;
-    let max = 0, min = 0;
-    if (arr[0] <= Math.floor(N/2)) {
-        max = arr[0] + Math.floor(N/2);
-        min = arr[0];
-        arr.reduce((val) => ((val <= N && val >= max) || (val <= min)) ? left++ : 0);
-        arr.reduce((val) => (val <= max && val >= min) ? right++ : 0);
-        if (left >= right) {
-            for (let i = max; i <= N; i++) {
-                let sum = 0;
-                arr.forEach((curr, index) => {
-                    sum += dist(i, curr, N);
-                })
-                // console.log({i, sum});
-                distsPerN.push(sum);
-            }
-            for (let i = 1; i <= min; i++) {
-                let sum = 0;
-                arr.forEach((curr, index) => {
-                    sum += dist(i, curr, N);
-                })
-                // console.log({i, sum});
-                distsPerN.push(sum);
-            }
-            // console.log({distsPerN});
-        } else {
-            for (let i = min; i <= max; i++) {
-                let sum = 0;
-                arr.forEach((curr, index) => {
-                    sum += dist(i, curr, N);
-                })
-                // console.log({i, sum});
-                distsPerN.push(sum);
-            }
-        }
-    } else {
-        min = arr[0] - Math.floor(N/2);
-        max = arr[0];
-        arr.reduce((val) => ((val <= N && val >= max) || (val <= min)) ? right++ : 0);
-        arr.reduce((val) => (val <= max && val >= min) ? left++ : 0);
-        if (left >= right) {
-            for (let i = min; i <= max; i++) {
-                let sum = 0;
-                arr.forEach((curr, index) => {
-                    sum += dist(i, curr, N);
-                })
-                // console.log({i, sum});
-                distsPerN.push(sum);
-            }
-        } else {
-            for (let i = max; i <= N; i++) {
-                // console.log({distsPerN});
-                let sum = 0;
-                arr.forEach((curr, index) => {
-                    sum += dist(i, curr, N);
-                })
-                // console.log({i, sum});
-                distsPerN.push(sum);
-            }
-            for (let i = 1; i <= min; i++) {
-                let sum = 0;
-                arr.forEach((curr, index) => {
-                    sum += dist(i, curr, N);
-                })
-                // console.log({i, sum});
-                distsPerN.push(sum);
-            }
-            // console.log({distsPerN});
-        }
-
-    }
-
+    arr.forEach((curr, index) => {
+        let sum = 0;
+        arr.forEach((curr2, index) => {
+            sum += dist(curr, curr2, N);
+        });
+        distsPerN.push(sum);
+    })
+    // console.log({i, sum});
 
     return Math.min(...distsPerN);
 }
