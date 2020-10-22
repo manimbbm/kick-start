@@ -16,12 +16,12 @@ for (let i = 1; i <= t; i++) {
     // console.time('WxN');
     // console.log(`Case #${i}: ${main_WxN(arr, W, N)}`);
     // console.timeEnd('WxN');
-    console.time('WxW');
-    console.log(`Case #${i}: ${main_WxW(arr, W, N)}`);
-    console.timeEnd('WxW');
     // console.time('WxW');
-    // console.log(`Case #${i}: ${main_WxlogW(arr, W, N)}`);
+    // console.log(`Case #${i}: ${main_WxW(arr, W, N)}`);
     // console.timeEnd('WxW');
+    console.time('WxlogW');
+    // console.log(`Case #${i}: ${main_WxlogW(arr, W, N)}`);
+    console.timeEnd('WxlogW');
 }
 
 function main_WxN(arr, W, N) {
@@ -39,7 +39,24 @@ function main_WxN(arr, W, N) {
 
     return Math.min(...distsPerN);
 }
+
 function main_WxW(arr, W, N) {
+    //greedy, get all sums for each given wheel value O(WxW)
+    let distsPerN: number[] = [];
+
+    arr.forEach((curr, index) => {
+        let sum = 0;
+        arr.forEach((curr2, index) => {
+            sum += dist(curr, curr2, N);
+        });
+        distsPerN.push(sum);
+    })
+    // console.log({i, sum});
+
+    return Math.min(...distsPerN);
+}
+
+function main_WxlogW(arr, W, N) {
     //greedy, get all sums for each given wheel value O(WxW)
     arr.sort((a, b) => a - b);
     let distsPerN: number[] = [];
