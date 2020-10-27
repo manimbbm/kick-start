@@ -20,7 +20,7 @@ for (let i = 1; i <= t; i++) {
     // console.log(`Case #${i}: ${main_WxW(arr, W, N)}`);
     // console.timeEnd('WxW');
     console.time('WxlogW');
-    // console.log(`Case #${i}: ${main_WxlogW(arr, W, N)}`);
+    console.log(`Case #${i}: ${main_WxlogW(arr, W, N)}`);
     console.timeEnd('WxlogW');
 }
 
@@ -57,20 +57,67 @@ function main_WxW(arr, W, N) {
 }
 
 function main_WxlogW(arr, W, N) {
-    //greedy, get all sums for each given wheel value O(WxW)
+    //optimal, update curr sums for each given wheel value O(WxW)
     arr.sort((a, b) => a - b);
-    let distsPerN: number[] = [];
+    let currSum: number = 0;
+    let posCount = 0, negCount = 0;
+    let preSum: number[] = [];
+    let currPreSum = 0;
+    arr.forEach((currWheel, index) => {
+        if (index !== 0) {
+            let dist;
+            if (arr[0] - currWheel > 0) {
+                if ( arr[0] - currWheel > N/2) {
+                    //go anti clockwise way
+                    dist = currWheel + (N - arr[0]);
+                } else {
+                    //go clockwise way
+                    dist = arr[0] - currWheel;
+                    posCount++;
+                }
+                negCount = W - posCount - 1;
+            } else {
+                if (currWheel - arr[0] > N/2) {
+                    //go anti clockwise way
+                    dist = (arr[0] + (N - currWheel));
+                } else {
+                    //go clockwise way
+                    dist = currWheel - arr[0];
+                    negCount++;
+                }
+                posCount = W - negCount - 1;
+            }
 
-    arr.forEach((curr, index) => {
-        let sum = 0;
-        arr.forEach((curr2, index) => {
-            sum += dist(curr, curr2, N);
-        });
-        distsPerN.push(sum);
-    })
+            currSum += dist;
+        }
+        currPreSum += currWheel;
+        preSum.push(currPreSum);
+    });
+
+    console.log({
+        negCount,
+        posCount,
+        preSum,
+        arr,
+        getSum12: {
+            result: getSum(1, 2, preSum)
+        }
+    });
+
+    let optSum: number = currSum;
+
+    for (let i = 1; i < arr.length; i++) {
+        //    update currSum
+        negCount--;
+        posCount++;
+        let shift = arr[i] - arr[i-1];
+        currSum = currSum - negCount*(shift) - posCount*(shift);
+        if (currSum < optSum) optSum = currSum;
+    }
+
     // console.log({i, sum});
 
-    return Math.min(...distsPerN);
+    return optSum;
 }
 
 
@@ -83,6 +130,29 @@ function dist(a: number, b: number, N: number) {
     } else {
         return Math.abs( a - b);
     }
+}
+
+function getSum(i: number, j: number, preSum: number[]) {
+    console.log('getSum');
+    console.log([
+        {
+            iminus: i - 1,
+            preI: preSum[i - 1]
+        },
+        {
+            i,
+            preI: preSum[i]
+        },
+        {
+            j,
+            preJ: preSum[j]
+        }]);
+
+    if (i === 0) {
+        return preSum[j];
+    }
+
+    return preSum[j] - preSum[i-1];
 }
 
 function nBetween(a: number, N: number, arr: number[]) {
