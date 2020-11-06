@@ -13,12 +13,6 @@ let t = readline();
 for (let i = 1; i <= t; i++) {
     let [W, N] = readline().split(' ').map(x => +x);
     let arr = readline().split(' ').map(x => +x);
-    // console.time('WxN');
-    // console.log(`Case #${i}: ${main_WxN(arr, W, N)}`);
-    // console.timeEnd('WxN');
-    // console.time('WxW');
-    // console.log(`Case #${i}: ${main_WxW(arr, W, N)}`);
-    // console.timeEnd('WxW');
     console.time('WxlogW');
     console.log(`Case #${i}: ${main_WxlogW(arr, W, N)}`);
     console.timeEnd('WxlogW');
@@ -60,7 +54,7 @@ function main_WxlogW(arr, W, N) {
     //optimal, update curr sums for each given wheel value O(WxW)
     arr.sort((a, b) => a - b);
     let currSum: number = 0;
-    let posCount = 0, negCount = 0;
+    let goToRight: {}[] = [], goToLeft: {}[] = [];
     let preSum: number[] = [];
     let currPreSum = 0;
     arr.forEach((currWheel, index) => {
@@ -68,26 +62,21 @@ function main_WxlogW(arr, W, N) {
             let dist;
             if (arr[0] - currWheel > 0) {
                 if ( arr[0] - currWheel > N/2) {
-                    //go anti clockwise way
                     dist = currWheel + (N - arr[0]);
+                    goToRight.push({currWheel, index});
                 } else {
-                    //go clockwise way
                     dist = arr[0] - currWheel;
-                    posCount++;
+                    goToLeft.push({currWheel, index});
                 }
-                negCount = W - posCount - 1;
             } else {
                 if (currWheel - arr[0] > N/2) {
-                    //go anti clockwise way
                     dist = (arr[0] + (N - currWheel));
+                    goToRight.push({currWheel, index});
                 } else {
-                    //go clockwise way
                     dist = currWheel - arr[0];
-                    negCount++;
+                    goToLeft.push({currWheel, index});
                 }
-                posCount = W - negCount - 1;
             }
-
             currSum += dist;
         }
         currPreSum += currWheel;
@@ -95,8 +84,8 @@ function main_WxlogW(arr, W, N) {
     });
 
     console.log({
-        negCount,
-        posCount,
+        goToLeft,
+        goToRight,
         preSum,
         arr,
         getSum12: {
@@ -106,12 +95,14 @@ function main_WxlogW(arr, W, N) {
 
     let optSum: number = currSum;
 
-    for (let i = 1; i < arr.length; i++) {
+    for (let i = 0; i < arr.length; i++) {
         //    update currSum
-        negCount--;
-        posCount++;
+        // todo iterate through all wheels and use getSum to check the distances. Update goToLeft/Right queues while doing so
+        if (arr[i] < N/2) {
+
+        }
         let shift = arr[i] - arr[i-1];
-        currSum = currSum - negCount*(shift) - posCount*(shift);
+        // currSum = currSum - goRight*(shift) - goLeft*(shift);
         if (currSum < optSum) optSum = currSum;
     }
 
@@ -133,21 +124,6 @@ function dist(a: number, b: number, N: number) {
 }
 
 function getSum(i: number, j: number, preSum: number[]) {
-    console.log('getSum');
-    console.log([
-        {
-            iminus: i - 1,
-            preI: preSum[i - 1]
-        },
-        {
-            i,
-            preI: preSum[i]
-        },
-        {
-            j,
-            preJ: preSum[j]
-        }]);
-
     if (i === 0) {
         return preSum[j];
     }
