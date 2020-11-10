@@ -54,8 +54,9 @@ function main_WxlogW(arr, W, N) {
     //optimal, update curr sums for each given wheel value O(WxW)
     arr.sort((a, b) => a - b);
     let currSum: number = 0;
-    let goToRight: {}[] = [], goToLeft: {}[] = [];
-    let preSum: number[] = [];
+    let goToRight_WrongWay: {}[] = [], goToLeft: {}[] = [], goToRigth: {}[] = [];
+    let preSum: number[] = new Array<number>(N+1).fill(0);
+
     let currPreSum = 0;
     arr.forEach((currWheel, index) => {
         if (index !== 0) {
@@ -63,7 +64,7 @@ function main_WxlogW(arr, W, N) {
             if (arr[0] - currWheel > 0) {
                 if ( arr[0] - currWheel > N/2) {
                     dist = currWheel + (N - arr[0]);
-                    goToRight.push({currWheel, index});
+                    goToRight_WrongWay.push({currWheel, index});
                 } else {
                     dist = arr[0] - currWheel;
                     goToLeft.push({currWheel, index});
@@ -71,7 +72,7 @@ function main_WxlogW(arr, W, N) {
             } else {
                 if (currWheel - arr[0] > N/2) {
                     dist = (arr[0] + (N - currWheel));
-                    goToRight.push({currWheel, index});
+                    goToRight_WrongWay.push({currWheel, index});
                 } else {
                     dist = currWheel - arr[0];
                     goToLeft.push({currWheel, index});
@@ -80,29 +81,36 @@ function main_WxlogW(arr, W, N) {
             currSum += dist;
         }
         currPreSum += currWheel;
-        preSum.push(currPreSum);
+        preSum[currWheel] = currPreSum;
     });
 
     console.log({
         goToLeft,
-        goToRight,
+        goToRight_WrongWay,
+        WrightLenght: goToRight_WrongWay.length,
+        rightLenght: goToRigth.length,
         preSum,
-        arr,
-        getSum12: {
-            result: getSum(1, 2, preSum)
-        }
+        arr
     });
 
     let optSum: number = currSum;
 
     for (let i = 0; i < arr.length; i++) {
-        //    update currSum
-        // todo iterate through all wheels and use getSum to check the distances. Update goToLeft/Right queues while doing so
         if (arr[i] < N/2) {
-
+            currSum = arr[i]*goToRigth.length - getSum(0, arr[i] - 1, preSum) +
+                - arr[i]*goToLeft.length + getSum(arr[i] + 1, arr[i] + N/2, preSum) +
+                (arr[i] + N)*(goToRight_WrongWay.length) - getSum(arr[i] + N/2 + 1, N, preSum);
+            console.log({
+                right: arr[i]*(goToRigth.length) - getSum(0, arr[i] - 1, preSum),
+                left: - arr[i]*goToLeft.length + getSum(arr[i] + 1, arr[i] + N/2, preSum),
+                Wright: (arr[i] + N)*(goToRight_WrongWay.length) - getSum(arr[i] + N/2 + 1, N, preSum),
+                currValue: arr[i],
+                currSum,
+                optSum
+            })
         }
+        //todo continue else case
         let shift = arr[i] - arr[i-1];
-        // currSum = currSum - goRight*(shift) - goLeft*(shift);
         if (currSum < optSum) optSum = currSum;
     }
 
@@ -124,6 +132,7 @@ function dist(a: number, b: number, N: number) {
 }
 
 function getSum(i: number, j: number, preSum: number[]) {
+    //todo doesnt work after the update as sth like getSum(1,N) could return 0 or less if no wheel starting from N
     if (i === 0) {
         return preSum[j];
     }
