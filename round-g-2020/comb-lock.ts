@@ -83,7 +83,6 @@ function main_WxlogW(arr, W, N) {
         currPreSum += currWheel;
         preSum.push(currPreSum);
     });
-    preSum.push(currPreSum);
 
     console.log({
         goToLeft,
@@ -148,11 +147,11 @@ function getSum(i: number, j: number, preSum: number[]) {
     //         j,
     //         preJ: preSum[j]
     //     }]);
-    if (i === 0) {
+    if (i === 0 || i === j) {
         return preSum[j];
     }
 
-    return preSum[j+1] - preSum[i];
+    return preSum[j] - preSum[i-1];
 }
 
 function nBetween(a: number, N: number, arr: number[]) {

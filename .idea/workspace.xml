@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5313d9a2-437c-4efb-a979-ea26134ccc66" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/round-g-2020/comb-lock.ts" beforeDir="false" afterPath="$PROJECT_DIR$/round-g-2020/comb-lock.ts" afterDir="false" />
-    </list>
+    <list default="true" id="5313d9a2-437c-4efb-a979-ea26134ccc66" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -162,7 +159,7 @@
       <workItem from="1604389518136" duration="1062000" />
       <workItem from="1604646839669" duration="2904000" />
       <workItem from="1604992315788" duration="4927000" />
-      <workItem from="1605167286515" duration="1942000" />
+      <workItem from="1605167286515" duration="2406000" />
     </task>
     <servers />
   </component>
