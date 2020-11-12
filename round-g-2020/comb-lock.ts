@@ -55,7 +55,7 @@ function main_WxlogW(arr, W, N) {
     arr.sort((a, b) => a - b);
     let currSum: number = 0;
     let goToRight_WrongWay: {}[] = [], goToLeft: {}[] = [], goToRigth: {}[] = [];
-    let preSum: number[] = new Array<number>(N+1).fill(0);
+    let preSum: number[] = [0];
 
     let currPreSum = 0;
     arr.forEach((currWheel, index) => {
@@ -81,8 +81,9 @@ function main_WxlogW(arr, W, N) {
             currSum += dist;
         }
         currPreSum += currWheel;
-        preSum[currWheel] = currPreSum;
+        preSum.push(currPreSum);
     });
+    preSum.push(currPreSum);
 
     console.log({
         goToLeft,
@@ -97,13 +98,14 @@ function main_WxlogW(arr, W, N) {
 
     for (let i = 0; i < arr.length; i++) {
         if (arr[i] < N/2) {
-            currSum = arr[i]*goToRigth.length - getSum(0, arr[i] - 1, preSum) +
-                - arr[i]*goToLeft.length + getSum(arr[i] + 1, arr[i] + N/2, preSum) +
-                (arr[i] + N)*(goToRight_WrongWay.length) - getSum(arr[i] + N/2 + 1, N, preSum);
+            console.log({ currBefore: currSum });
+            currSum = arr[i]*goToRigth.length - getSum(0, goToRigth.length, preSum) +
+                - arr[i]*goToLeft.length + getSum(goToRigth.length + 1, goToRigth.length + goToLeft.length, preSum) +
+                (arr[i] + N)*(goToRight_WrongWay.length) - getSum(goToRigth.length + goToLeft.length + 1, W, preSum);
             console.log({
-                right: arr[i]*(goToRigth.length) - getSum(0, arr[i] - 1, preSum),
-                left: - arr[i]*goToLeft.length + getSum(arr[i] + 1, arr[i] + N/2, preSum),
-                Wright: (arr[i] + N)*(goToRight_WrongWay.length) - getSum(arr[i] + N/2 + 1, N, preSum),
+                right: arr[i]*goToRigth.length - getSum(0, goToRigth.length, preSum),
+                left: - arr[i]*goToLeft.length + getSum(goToRigth.length + 1, goToRigth.length + goToLeft.length, preSum),
+                Wright: (arr[i] + N)*(goToRight_WrongWay.length) - getSum(goToRigth.length + goToLeft.length + 1, W, preSum),
                 currValue: arr[i],
                 currSum,
                 optSum
@@ -132,12 +134,25 @@ function dist(a: number, b: number, N: number) {
 }
 
 function getSum(i: number, j: number, preSum: number[]) {
-    //todo doesnt work after the update as sth like getSum(1,N) could return 0 or less if no wheel starting from N
+    // console.log('getSum');
+    // console.log([
+    //     {
+    //         iminus: i - 1,
+    //         preI: preSum[i - 1]
+    //     },
+    //     {
+    //         i,
+    //         preI: preSum[i]
+    //     },
+    //     {
+    //         j,
+    //         preJ: preSum[j]
+    //     }]);
     if (i === 0) {
         return preSum[j];
     }
 
-    return preSum[j] - preSum[i-1];
+    return preSum[j+1] - preSum[i];
 }
 
 function nBetween(a: number, N: number, arr: number[]) {

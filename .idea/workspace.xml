@@ -161,7 +161,8 @@
       <workItem from="1603872073698" duration="708000" />
       <workItem from="1604389518136" duration="1062000" />
       <workItem from="1604646839669" duration="2904000" />
-      <workItem from="1604992315788" duration="4285000" />
+      <workItem from="1604992315788" duration="4927000" />
+      <workItem from="1605167286515" duration="1942000" />
     </task>
     <servers />
   </component>
@@ -201,6 +202,10 @@
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="625" y="360" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1920.1057/1067.1103.1440.877/1920.53.1680.1027@0.23.1920.1057" timestamp="1597819009254" />
+    <state x="100" y="123" width="1720" height="857" key="DiffContextDialog" timestamp="1605168900411">
+      <screen x="0" y="23" width="1920" height="1057" />
+    </state>
+    <state x="100" y="123" width="1720" height="857" key="DiffContextDialog/0.23.1920.1057/1920.303.1280.777@0.23.1920.1057" timestamp="1605168900411" />
     <state x="770" y="279" key="RollbackChangesDialog" timestamp="1598339812612">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
@@ -211,6 +216,10 @@
     <state x="201" y="-932" key="SettingsEditor/-127.-1027.1680.1027/0.23.1440.877@-127.-1027.1680.1027" timestamp="1597301246719" />
     <state x="375" y="121" key="SettingsEditor/0.23.1920.1057/1067.1103.1440.877/1920.53.1680.1027@0.23.1920.1057" timestamp="1597819109659" />
     <state x="375" y="121" key="SettingsEditor/0.23.1920.1057/1920.303.1280.777@0.23.1920.1057" timestamp="1600237722995" />
+    <state x="778" y="256" key="VCS.ChangeListViewerDialog" timestamp="1605168372245">
+      <screen x="0" y="23" width="1920" height="1057" />
+    </state>
+    <state x="778" y="256" key="VCS.ChangeListViewerDialog/0.23.1920.1057/1920.303.1280.777@0.23.1920.1057" timestamp="1605168372245" />
     <state x="667" y="306" width="586" height="490" key="find.popup" timestamp="1604993567794">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
