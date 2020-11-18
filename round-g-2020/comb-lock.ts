@@ -13,9 +13,8 @@ let t = readline();
 for (let i = 1; i <= t; i++) {
     let [W, N] = readline().split(' ').map(x => +x);
     let arr = readline().split(' ').map(x => +x);
-    console.time('WxlogW');
     console.log(`Case #${i}: ${main_WxlogW(arr, W, N)}`);
-    console.timeEnd('WxlogW');
+    // console.log(`Case #${i}: ${main_WxW(arr, W, N)}`);
 }
 
 function main_WxN(arr, W, N) {
@@ -54,8 +53,8 @@ function main_WxlogW(arr, W, N) {
     //optimal, update curr sums for each given wheel value O(WxW)
     arr.sort((a, b) => a - b);
     let currSum: number = 0;
-    let goToRight_WrongWay: {}[] = [], goToLeft: {}[] = [], goToRight: {}[] = [];
-    let preSum: number[] = [0];
+    let goToRight_WrongWay: {}[] = [], goToLeft_WrongWay: {}[] = [], goToLeft: {}[] = [], goToRight: {}[] = [];
+    let preSum: number[] = [];
 
     let currPreSum = 0;
     arr.forEach((currWheel, index) => {
@@ -85,7 +84,6 @@ function main_WxlogW(arr, W, N) {
     });
 
     let optSum: number = currSum;
-
     for (let i = 0; i < arr.length; i++) {
         console.log({
             currBefore: currSum,
@@ -95,12 +93,45 @@ function main_WxlogW(arr, W, N) {
             preSum,
             arr
         });
+        if (arr[i] <= Math.round(N/2)) {
+            let right = arr[i]*goToRight.length - getSum(0, i - 1, preSum);
+            let left = - arr[i]*goToLeft.length + getSum(i + 1, goToRight.length + goToLeft.length, preSum);
+            let Wright = (arr[i] + N)*(goToRight_WrongWay.length) - getSum(goToRight.length + goToLeft.length + 1, W - 1, preSum);
+            currSum = right + left + Wright;
 
-        if (arr[i] < N/2) {
-            // todo formula still wrong :(
-            currSum = arr[i]*goToRight.length - getSum(0, goToRight.length, preSum) +
-                - arr[i]*goToLeft.length + getSum(goToRight.length + 1, goToRight.length + goToLeft.length, preSum) +
-                (arr[i] + N)*(goToRight_WrongWay.length) - getSum(W + 1 - goToRight_WrongWay.length, W, preSum);
+            if (arr[i + 1] <= Math.round(N/2)) {
+                goToRight.push({ currWheel: arr[i], index: i });
+                goToLeft.splice(0, 1);
+
+                while (arr[i + 1] + N/2 <= goToRight_WrongWay[0]) {
+                    goToLeft.push(goToRight_WrongWay[0]);
+                    goToRight_WrongWay.splice(0, 1);
+                }
+            } else {
+                goToRight_WrongWay.splice(0, 1);
+                goToLeft = goToRight_WrongWay;
+            }
+            console.log({
+                right,
+                left,
+                Wright,
+                currValue: arr[i],
+                currSum,
+                optSum
+            })
+        } else {
+            //todo continue else case
+            goToRight.push({ currWheel: arr[i], index: i });
+            goToLeft.splice(0, 1);
+
+            while (arr[i + 1] + N/2 <= goToRight_WrongWay[0]) {
+                goToLeft.push(goToRight_WrongWay[0]);
+                goToRight_WrongWay.splice(0, 1);
+            }
+            let right = arr[i]*goToRight.length - getSum(0, i - 1, preSum);
+            let left = - arr[i]*goToLeft.length + getSum(i + 1, goToRight.length + goToLeft.length, preSum);
+            let Wright = (arr[i] + N)*(goToRight_WrongWay.length) - getSum(goToRight.length + goToLeft.length + 1, W - 1, preSum);
+            currSum = right + left + Wright;
 
             goToRight.push({ currWheel: arr[i], index: i });
             goToLeft.splice(0, 1);
@@ -109,23 +140,18 @@ function main_WxlogW(arr, W, N) {
                 goToLeft.push(goToRight_WrongWay[0]);
                 goToRight_WrongWay.splice(0, 1);
             }
-
-            // console.log({
-            //     "right: arr[i]*goToRight.length - getSum(0, goToRight.length, preSum)": arr[i]*goToRight.length - getSum(0, goToRight.length, preSum),
-            //     "left: - arr[i]*goToLeft.length + getSum(goToRight.length + 1, goToRight.length + goToLeft.length, preSum)": - arr[i]*goToLeft.length + getSum(goToRight.length + 1, goToRight.length + goToLeft.length, preSum),
-            //     "Wright: (arr[i] + N)*(goToRight_WrongWay.length) - getSum(goToRight.length + goToLeft.length + 1, W, preSum)": (arr[i] + N)*(goToRight_WrongWay.length) - getSum(W + 1 - goToRight_WrongWay.length, W, preSum),
-            //     currValue: arr[i],
-            //     currSum,
-            //     optSum
-            // })
+            console.log({
+                right,
+                left,
+                Wright,
+                currValue: arr[i],
+                currSum,
+                optSum
+            })
         }
-        //todo continue else case
         let shift = arr[i] - arr[i-1];
         if (currSum < optSum) optSum = currSum;
     }
-
-    // console.log({i, sum});
-
     return optSum;
 }
 
@@ -156,10 +182,10 @@ function getSum(i: number, j: number, preSum: number[]) {
     //         j,
     //         preJ: preSum[j]
     //     }]);
-    if (i === 0) {
-        return preSum[j];
-    } else if (i === preSum.length) {
+    if (i === preSum.length || j < 0) {
         return 0;
+    } else if (i === 0) {
+        return preSum[j];
     }
 
     return preSum[j] - preSum[i-1];
