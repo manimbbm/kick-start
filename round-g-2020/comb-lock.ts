@@ -3,6 +3,14 @@ const fs = require('fs');
 const input = fs.readFileSync('./comb-lock-test.txt', 'utf-8').trim().split('\n');
 // const input = fs.readFileSync(0, 'utf-8').trim().split('\n');
 
+// debugging notes. test case: 1 2 3 12 28 29 78 195 273 340 348 373 463 501 550 659 777
+// 1. if 550 is removed from the test case above then the final results match, but some intermediate sums are wrong
+// 2. val 78 index 6 is the first with wrong result.
+// 3. Reduced test case to 1 78 550 777 and sum at 78 stage is wrong
+// - Had wrong conditions to update left/right arrays. One for each half
+
+
+
 let line = 0;
 function readline(){
     return input[line++];
@@ -13,11 +21,14 @@ let t = readline();
 for (let i = 1; i <= t; i++) {
     let [W, N] = readline().split(' ').map(x => +x);
     let arr = readline().split(' ').map(x => +x);
-    console.log('main_WxW');
+    console.time('main_WxW');
     console.log(`Case #${i}: ${main_WxW(arr, W, N)}`);
+    console.timeEnd('main_WxW');
 
-    console.log('main_WxlogW');
+    console.time('main_WxlogW');
     console.log(`Case #${i}: ${main_WxlogW(arr, W, N)}`);
+    console.timeEnd('main_WxlogW');
+    console.log(`\n`);
 }
 
 function main_WxN(arr, W, N) {
@@ -45,6 +56,12 @@ function main_WxW(arr, W, N) {
         arr.forEach((curr2, index) => {
             sum += dist(curr, curr2, N);
         });
+        // console.log({
+        //     currSum: sum,
+        //     minSum: Math.min(...distsPerN),
+        //     currValue: curr,
+        //     index
+        // });
         distsPerN.push(sum);
     })
     // console.log({i, sum});
@@ -53,8 +70,9 @@ function main_WxW(arr, W, N) {
 }
 
 interface Wheel {
-    currWheel: number, index: number
+    val: number, index: number
 }
+
 function main_WxlogW(arr, W, N) {
     //optimal, update curr sums for each given wheel value O(WxW)
     arr.sort((a, b) => a - b);
@@ -69,18 +87,18 @@ function main_WxlogW(arr, W, N) {
             if (arr[0] - currWheel > 0) {
                 if ( arr[0] - currWheel > N/2) {
                     dist = currWheel + (N - arr[0]);
-                    goToRight_WrongWay.push({currWheel, index});
+                    goToRight_WrongWay.push({val: currWheel, index});
                 } else {
                     dist = arr[0] - currWheel;
-                    goToLeft.push({currWheel, index});
+                    goToLeft.push({val: currWheel, index});
                 }
             } else {
                 if (currWheel - arr[0] > N/2) {
                     dist = (arr[0] + (N - currWheel));
-                    goToRight_WrongWay.push({currWheel, index});
+                    goToRight_WrongWay.push({val: currWheel, index});
                 } else {
                     dist = currWheel - arr[0];
-                    goToLeft.push({currWheel, index});
+                    goToLeft.push({val: currWheel, index});
                 }
             }
             currSum += dist;
@@ -99,7 +117,10 @@ function main_WxlogW(arr, W, N) {
         //     goToRight_WrongWay,
         //     goToLeft_WrongWay,
         //     preSum,
-        //     arr
+        //     arr,
+        //     rightGetSum: getSum(0, i - 1, preSum),
+        //     leftGetSum: getSum(i + 1, goToRight.length + goToLeft.length, preSum),
+        //     wrightGetSum: getSum(goToRight.length + goToLeft.length + 1, arr.length - 1, preSum)
         // });
         if (arr[i] <= Math.round(N/2)) {
             let right = arr[i]*goToRight.length - getSum(0, i - 1, preSum);
@@ -108,27 +129,29 @@ function main_WxlogW(arr, W, N) {
             currSum = right + left + Wright;
 
             if (arr[i + 1] <= Math.round(N/2)) {
-                goToRight.push({currWheel: arr[i], index: i});
+                goToRight.push({val: arr[i], index: i});
                 goToLeft.splice(0, 1);
-
-                while (arr[i + 1] + N/2 <= goToRight_WrongWay[0]) {
+                
+                while (goToRight_WrongWay[0] && arr[i + 1] + N/2 >= goToRight_WrongWay[0].val) {
                     goToLeft.push(goToRight_WrongWay[0]);
                     goToRight_WrongWay.splice(0, 1);
                 }
             } else {
-                goToRight_WrongWay.splice(0, 1);
+                if (goToRight_WrongWay[0] && arr[i + 1] === goToRight_WrongWay[0].val) {
+                    goToRight_WrongWay.splice(0, 1);
+                }
                 goToLeft = goToRight_WrongWay;
                 goToRight_WrongWay = [];
 
-                while (goToRight[0] && arr[i + 1] - N/2 > goToRight[0].currWheel) {
+                while (goToRight[0] && arr[i + 1] - N/2 > goToRight[0].val) {
                     goToLeft_WrongWay.push(goToRight[0]);
                     goToRight.splice(0, 1);
                 }
 
                 if(arr[i + 1] && arr[i + 1] - N/2 > arr[i]) {
-                    goToLeft_WrongWay.push({ currWheel: arr[i], index: i });
+                    goToLeft_WrongWay.push({ val: arr[i], index: i });
                 } else {
-                    goToRight.push({ currWheel: arr[i], index: i });
+                    goToRight.push({ val: arr[i], index: i });
                 }
             }
             // console.log({
@@ -146,12 +169,12 @@ function main_WxlogW(arr, W, N) {
 
             goToLeft.splice(0, 1);
 
-            while (goToRight[0] && arr[i + 1] - N/2 > goToRight[0].currWheel) {
+            while (goToRight[0] && arr[i + 1] - N/2 > goToRight[0].val) {
                 goToLeft_WrongWay.push(goToRight[0]);
                 goToRight.splice(0, 1);
             }
 
-            goToRight.push({ currWheel: arr[i], index: i });
+            goToRight.push({ val: arr[i], index: i });
 
             // console.log({
             //     right,
@@ -161,6 +184,11 @@ function main_WxlogW(arr, W, N) {
             //     optSum,
             // })
         }
+        // console.log({
+        //     currSum: currSum,
+        //     currValue: arr[i],
+        //     i
+        // });
         if (currSum < optSum) optSum = currSum;
     }
     return optSum;
